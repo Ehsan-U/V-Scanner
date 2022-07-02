@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="utf-8"?>
+<svg viewBox="-72.011 -33.032 536.608 550.317" xmlns="http://www.w3.org/2000/svg">
+  <defs>
+    <linearGradient gradientUnits="userSpaceOnUse" x1="198.194" y1="-30.391" x2="198.194" y2="510.019" id="gradient-0">
+      <stop offset="0" style="stop-color: rgba(255, 255, 255, 1)"/>
+      <stop offset="1" style="stop-color: rgba(204, 204, 204, 1)"/>
+    </linearGradient>
+  </defs>
+  <ellipse style="stroke-width: 4px; paint-order: fill; stroke: rgb(18, 18, 18); fill: url(#gradient-0);" cx="198.194" cy="239.814" rx="246.42" ry="270.205"/>
+  <path d="M 364.984 96.81 L 223.482 488.077 C 218.582 499.947 206.882 507.747 193.982 507.747 C 181.082 507.747 169.422 499.99 164.452 488.067 L 34.181 113.316 C 27.384 97.006 -18.425 104.032 -2.111 97.242 C 14.269 90.383 56.752 63.149 63.512 79.447 L 193.982 392.547 L 324.482 79.447 C 331.248 63.147 372.414 79.801 388.784 86.671 C 405.044 93.471 371.784 80.49 364.984 96.81 Z" style="fill-rule: nonzero; fill: rgb(238, 108, 77);"/>
+</svg>

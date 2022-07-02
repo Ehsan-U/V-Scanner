@@ -1,0 +1,5 @@
+Module4.csrf INFO check_csrf CSRF found http://testphp.vulnweb.com
+Module4.csrf INFO check_csrf CSRF found http://testphp.vulnweb.com/login.php
+Module4.csrf INFO check_csrf CSRF found http://testphp.vulnweb.com/guestbook.php
+Module4.csrf INFO check_csrf CSRF found http://testphp.vulnweb.com/signup.php
+Module4.csrf INFO check_csrf CSRF found http://testphp.vulnweb.com/product.php?pic=1

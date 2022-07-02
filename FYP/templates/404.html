@@ -1,0 +1,20 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block content %}
+    <div class="container">
+      <div id="notfound">
+      <div class="notfound">
+        <div class="notfound-404">
+          <h3>Oops! {{error}}</h3>
+          <h1><span>{{code.0}}</span><span>{{code.1}}</span><span>{{code.2}}</span></h1>
+        </div>
+        <h2>we are sorry, your request cannot be processed</h2>
+      </div>
+	  </div>
+    </div>
+    <footer class="py-4 bg-black fixed-bottom">
+        <div class="container"><p class="text-center text-white m-0 small">Copyright&nbsp;© Brand 2022</p></div>
+    </footer>
+
+{% endblock content %}

@@ -1,0 +1,76 @@
+Main_Crawler INFO do_req [+] Request Sent to http://testphp.vulnweb.com
+Main_Crawler INFO do_req [+] Sending For Parsing http://testphp.vulnweb.com
+Main_Crawler INFO parse [+] Form Found http://testphp.vulnweb.com
+Main_Crawler INFO do_req [+] Request Sent to http://testphp.vulnweb.com/categories.php
+Main_Crawler INFO do_req [+] Sending For Parsing http://testphp.vulnweb.com/categories.php
+Main_Crawler INFO parse [+] Form Found http://testphp.vulnweb.com/categories.php
+Main_Crawler INFO do_req [+] Request Sent to http://testphp.vulnweb.com/AJAX/index.php
+Main_Crawler INFO do_req [+] Sending For Parsing http://testphp.vulnweb.com/AJAX/index.php
+Main_Crawler INFO do_req [+] Request Sent to http://testphp.vulnweb.com/index.php
+Main_Crawler INFO do_req [+] Sending For Parsing http://testphp.vulnweb.com/index.php
+Main_Crawler INFO do_req [+] Request Sent to http://testphp.vulnweb.com/hpp/
+Main_Crawler INFO do_req [+] Sending For Parsing http://testphp.vulnweb.com/hpp/
+Main_Crawler INFO do_req [+] Request Sent to http://testphp.vulnweb.com/cart.php
+Main_Crawler INFO do_req [+] Sending For Parsing http://testphp.vulnweb.com/cart.php
+Main_Crawler INFO do_req [+] Request Sent to http://testphp.vulnweb.com/artists.php
+Main_Crawler INFO do_req [+] Sending For Parsing http://testphp.vulnweb.com/artists.php
+Main_Crawler INFO do_req [+] Request Sent to http://testphp.vulnweb.com/Mod_Rewrite_Shop/
+Main_Crawler INFO do_req [+] Request Sent to http://testphp.vulnweb.com/login.php
+Main_Crawler INFO do_req [+] Sending For Parsing http://testphp.vulnweb.com/login.php
+Main_Crawler INFO do_req [+] Request Sent to http://testphp.vulnweb.com/privacy.php
+Main_Crawler INFO do_req [+] Sending For Parsing http://testphp.vulnweb.com/privacy.php
+Main_Crawler INFO do_req [+] Request Sent to http://testphp.vulnweb.com/guestbook.php
+Main_Crawler INFO do_req [+] Sending For Parsing http://testphp.vulnweb.com/guestbook.php
+Main_Crawler INFO do_req [+] Request Sent to http://testphp.vulnweb.com/disclaimer.php
+Main_Crawler INFO parse [+] Form Found http://testphp.vulnweb.com/index.php
+Main_Crawler INFO do_req [+] Request Sent to http://testphp.vulnweb.com/userinfo.php
+Main_Crawler INFO do_req [+] Sending For Parsing http://testphp.vulnweb.com/Mod_Rewrite_Shop/
+Main_Crawler INFO do_req [+] Sending For Parsing http://testphp.vulnweb.com/disclaimer.php
+Main_Crawler INFO do_req [+] Sending For Parsing http://testphp.vulnweb.com/userinfo.php
+Main_Crawler INFO parse [+] Form Found http://testphp.vulnweb.com/login.php
+Main_Crawler INFO parse [+] Form Found http://testphp.vulnweb.com/artists.php
+Main_Crawler INFO parse [+] Form Found http://testphp.vulnweb.com/cart.php
+Main_Crawler INFO parse [+] Form Found http://testphp.vulnweb.com/guestbook.php
+Main_Crawler INFO parse [+] Form Found http://testphp.vulnweb.com/disclaimer.php
+Main_Crawler INFO do_req [+] Request Sent to http://testphp.vulnweb.com/hpp/?pp=12
+Main_Crawler INFO do_req [+] Request Sent to http://testphp.vulnweb.com/artists.php?artist=1
+Main_Crawler INFO do_req [+] Sending For Parsing http://testphp.vulnweb.com/hpp/?pp=12
+Main_Crawler INFO do_req [+] Request Sent to http://testphp.vulnweb.com/listproducts.php?cat=1
+Main_Crawler INFO do_req [+] Request Sent to http://testphp.vulnweb.com/Mod_Rewrite_Shop/Details/web-camera-a4tech/2/
+Main_Crawler INFO do_req [+] Request Sent to http://testphp.vulnweb.com/Mod_Rewrite_Shop/Details/network-attached-storage-dlink/1/
+Main_Crawler INFO do_req [+] Request Sent to http://testphp.vulnweb.com/signup.php
+Main_Crawler INFO do_req [+] Request Sent to http://testphp.vulnweb.com/Mod_Rewrite_Shop/Details/color-printer/3/
+Main_Crawler INFO do_req [+] Sending For Parsing http://testphp.vulnweb.com/artists.php?artist=1
+Main_Crawler INFO do_req [+] Sending For Parsing http://testphp.vulnweb.com/listproducts.php?cat=1
+Main_Crawler INFO do_req [+] Sending For Parsing http://testphp.vulnweb.com/Mod_Rewrite_Shop/Details/web-camera-a4tech/2/
+Main_Crawler INFO do_req [+] Sending For Parsing http://testphp.vulnweb.com/Mod_Rewrite_Shop/Details/network-attached-storage-dlink/1/
+Main_Crawler INFO do_req [+] Sending For Parsing http://testphp.vulnweb.com/signup.php
+Main_Crawler INFO do_req [+] Sending For Parsing http://testphp.vulnweb.com/Mod_Rewrite_Shop/Details/color-printer/3/
+Main_Crawler INFO parse [+] Form Found http://testphp.vulnweb.com/hpp/?pp=12
+Main_Crawler INFO parse [+] Form Found http://testphp.vulnweb.com/artists.php?artist=1
+Main_Crawler INFO parse [+] Form Found http://testphp.vulnweb.com/listproducts.php?cat=1
+Main_Crawler INFO parse [+] Form Found http://testphp.vulnweb.com/signup.php
+Main_Crawler INFO do_req [+] Request Sent to http://testphp.vulnweb.com/product.php?pic=1
+Main_Crawler INFO do_req [+] Sending For Parsing http://testphp.vulnweb.com/product.php?pic=1
+Main_Crawler INFO do_req [+] Request Sent to http://testphp.vulnweb.com/Mod_Rewrite_Shop/BuyProduct-3/
+Main_Crawler INFO do_req [+] Sending For Parsing http://testphp.vulnweb.com/Mod_Rewrite_Shop/BuyProduct-3/
+Main_Crawler INFO parse [+] Form Found http://testphp.vulnweb.com/product.php?pic=1
+Main_Crawler INFO do_req [+] Request Sent to http://testphp.vulnweb.com/hpp/params.php?p=valid&pp=12
+Main_Crawler INFO do_req [+] Sending For Parsing http://testphp.vulnweb.com/hpp/params.php?p=valid&pp=12
+Main_Crawler INFO do_req [+] Request Sent to http://testphp.vulnweb.com/Mod_Rewrite_Shop/RateProduct-2.html
+Main_Crawler INFO do_req [+] Sending For Parsing http://testphp.vulnweb.com/Mod_Rewrite_Shop/RateProduct-2.html
+Main_Crawler INFO do_req [+] Request Sent to http://testphp.vulnweb.com/showimage.php?file=./pictures/1.jpg
+Main_Crawler INFO do_req [+] Sending For Parsing http://testphp.vulnweb.com/showimage.php?file=./pictures/1.jpg
+Main_Crawler INFO do_req [+] Request Sent to http://testphp.vulnweb.com/listproducts.php?artist=1
+Main_Crawler INFO do_req [+] Request Sent to http://testphp.vulnweb.com/Mod_Rewrite_Shop/BuyProduct-2/
+Main_Crawler INFO do_req [+] Sending For Parsing http://testphp.vulnweb.com/Mod_Rewrite_Shop/BuyProduct-2/
+Main_Crawler INFO do_req [+] Request Sent to http://testphp.vulnweb.com/Mod_Rewrite_Shop/BuyProduct-1/
+Main_Crawler INFO do_req [+] Sending For Parsing http://testphp.vulnweb.com/Mod_Rewrite_Shop/BuyProduct-1/
+Main_Crawler INFO do_req [+] Request Sent to http://testphp.vulnweb.com/Mod_Rewrite_Shop/RateProduct-3.html
+Main_Crawler INFO do_req [+] Sending For Parsing http://testphp.vulnweb.com/Mod_Rewrite_Shop/RateProduct-3.html
+Main_Crawler INFO do_req [+] Request Sent to http://testphp.vulnweb.com/Mod_Rewrite_Shop/RateProduct-1.html
+Main_Crawler INFO do_req [+] Sending For Parsing http://testphp.vulnweb.com/Mod_Rewrite_Shop/RateProduct-1.html
+Main_Crawler INFO do_req [+] Sending For Parsing http://testphp.vulnweb.com/listproducts.php?artist=1
+Main_Crawler INFO parse [+] Form Found http://testphp.vulnweb.com/listproducts.php?artist=1
+Main_Crawler INFO do_req [+] Request Sent to http://testphp.vulnweb.com/showimage.php?file=./pictures/1.jpg&size=160
+Main_Crawler INFO do_req [+] Sending For Parsing http://testphp.vulnweb.com/showimage.php?file=./pictures/1.jpg&size=160

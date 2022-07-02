@@ -1,0 +1,27 @@
+#grades_display {
+    display: flex;
+}
+#grades_view {
+        width: 25%;
+    }
+@media only screen and (max-width: 576px) {
+    #grades_display {
+
+        display: block;
+        text-align: center;
+    }
+    #grades_view {
+        display: inline-block;
+        margin-bottom: 1rem;
+        /*margin-left: 6rem;*/
+        width: 50%;
+        height: 50%;
+    }
+    #grade_div {
+        padding-right: 3rem;
+        padding-top: 1rem;
+        padding-left: 3rem;
+        margin-bottom: 2rem;
+    }
+
+}

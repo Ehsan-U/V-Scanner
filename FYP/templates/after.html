@@ -1,0 +1,387 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block content %}
+<header class="text-center text-white masthead">
+  <div class="masthead-content">
+    <div class="container">
+      <h1 class="masthead-heading mb-1">Scan your website</h1>
+      <div class="form-check-inline">
+        <div id="scan_form" class="d-line-block">
+          <div id="url_div">
+            <input name="search" type="text" class="form-control" maxlength="100" id="url" placeholder="http://example.com">
+          </div>
+          <div class="form-check-inline mt-2">
+              <div class="pe-2">
+                <select class="form-select" id="selection" name="selection">
+                    <option value="default" selected="">Light</option>
+                    <option value="deep">Deep</option>
+                </select>
+              </div>
+              <div>
+                  <button id="scan" class="btn btn-primary" onclick="send_req();">Scan</button>
+              </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="bg-circle-1 bg-circle"></div>
+  <div class="bg-circle-2 bg-circle"></div>
+  <div class="bg-circle-3 bg-circle"></div>
+  <div class="bg-circle-4 bg-circle"></div>
+</header>
+
+<div class="container my-5" id="grades_display">
+    <div id="grades_view" class="border border-4 border-dark text-center ps-xxl-5 pe-xxl-5 pt-xxl-4 ms-xxl-2 me-xxl-2 ps-xl-5 pe-xl-5 pt-xl-4 ms-xl-2 me-xl-2 ps-md-5 pe-md-5 pt-md-4 ms-md-2 me-md-2 ps-sm-5 pe-sm-5 pt-sm-4 ms-sm-2 me-sm-2 bg-white" >
+        <div class="container mt-4 d-flex justify-content-center" style="width: 2rem;">
+            {% if Grade == "F"%}
+                <div id="grade_div" class="rounded-3 shadow-4 text-center ps-xxl-5 pe-xxl-5 pt-xxl-4 pb-xxl-3 ps-xl-5 pe-xl-5 pt-xl-4 pb-xl-3 ps-md-5 pe-md-5 pt-md-4 pb-md-3 ps-sm-4 pe-sm-4 pt-sm-4 pb-sm-3" style="background-color: #DB1E1E;" data-toggle="tooltip" title="Target has worst level security measures!">
+            {% elif Grade == "E" %}
+                <div id="grade_div" class="rounded-3 shadow-4 text-center ps-xxl-5 pe-xxl-5 pt-xxl-4 pb-xxl-3 ps-xl-5 pe-xl-5 pt-xl-4 pb-xl-3 ps-md-5 pe-md-5 pt-md-4 pb-md-3 ps-sm-4 pe-sm-4 pt-sm-4 pb-sm-3" style="background-color: #E57322;" data-toggle="tooltip" title="Target has worst level security measures!">
+            {% elif Grade == "D" %}
+                <div id="grade_div" class="rounded-3 shadow-4 text-center ps-xxl-5 pe-xxl-5 pt-xxl-4 pb-xxl-3 ps-xl-5 pe-xl-5 pt-xl-4 pb-xl-3 ps-md-5 pe-md-5 pt-md-4 pb-md-3 ps-sm-4 pe-sm-4 pt-sm-4 pb-sm-3" style="background-color: #E57322;" data-toggle="tooltip" title="Target has medium level security measures!">
+            {% elif Grade == "C" %}
+                <div id="grade_div" class="rounded-3 shadow-4 text-center ps-xxl-5 pe-xxl-5 pt-xxl-4 pb-xxl-3 ps-xl-5 pe-xl-5 pt-xl-4 pb-xl-3 ps-md-5 pe-md-5 pt-md-4 pb-md-3 ps-sm-4 pe-sm-4 pt-sm-4 pb-sm-3" style="background-color: #FFD242;" data-toggle="tooltip" title="Target has medium level security measures!">
+            {% elif Grade == "B" %}
+                <div id="grade_div" class="rounded-3 shadow-4 text-center ps-xxl-5 pe-xxl-5 pt-xxl-4 pb-xxl-3 ps-xl-5 pe-xl-5 pt-xl-4 pb-xl-3 ps-md-5 pe-md-5 pt-md-4 pb-md-3 ps-sm-4 pe-sm-4 pt-sm-4 pb-sm-3" style="background-color: #dd5a02;" data-toggle="tooltip" title="Target has medium level security measures!">
+            {% elif Grade == "A" %}
+                <div id="grade_div" class="rounded-3 shadow-4 text-center ps-xxl-5 pe-xxl-5 pt-xxl-4 pb-xxl-3 ps-xl-5 pe-xl-5 pt-xl-4 pb-xl-3 ps-md-5 pe-md-5 pt-md-4 pb-md-3 ps-sm-4 pe-sm-4 pt-sm-4 pb-sm-3" style="background-color: #2B9100;" data-toggle="tooltip" title="Target has best possible security measures!">
+            {% elif Grade == "A+" %}
+                <div id="grade_div" class="rounded-3 shadow-4 text-center ps-xxl-5 pe-xxl-5 pt-xxl-4 pb-xxl-3 ps-xl-5 pe-xl-5 pt-xl-4 pb-xl-3 ps-md-5 pe-md-5 pt-md-4 pb-md-3 ps-sm-4 pe-sm-4 pt-sm-4 pb-sm-3" style="background-color: #34AF00;" data-toggle="tooltip" title="Target is Secure">
+            {% endif %}
+                <h1 id="grade" class="text-white ">{{ Grade }}</h1>
+            </div>
+        </div>
+    </div>
+    <div class="container-fluid justify-content-end">
+        <div id="report_con" class="border border-5 border-dark rounded-3 shadow-4 overflow-hidden" data-aos="fade" data-aos-once="true" data-aos-duration="800" data-aos-delay="100">
+            <table class="table mb-0 bg-white text-break aos-init" >
+                <thead class="table-dark" style="font-size: 16px;">
+                    <tr>
+                        <th scope="col" colspan="3">Report Details</th>
+                    </tr>
+                </thead>
+                <tbody style="font-size: 14px">
+                    {% for key,value in Metadata %}
+                        {% if key == "Target" %}
+                            <tr>
+                                <th scope="row">{{ key }}</th>
+                                {% if "https" in value.lower%}
+                                    <td id="target"><a data-toggle="tooltip" title="Site is using HTTPS"><img src="{% static 'images/secure.svg' %}" style="height: 25px;width: 25px;color: red"></a>&nbsp;&nbsp;{{ value }}</td>
+                                {% else %}
+                                    <td id="target"><a data-toggle="tooltip" title="Site is using HTTP"><img src="{% static 'images/http.svg' %}" style="height: 25px;width: 25px;color: red"></a>&nbsp;&nbsp;{{ value }}</td>
+                                {% endif %}
+                            </tr>
+                        {% else %}
+                            <tr>
+                                <td>{{ key }}</td>
+                                <td>{{ value }}</td>
+                            </tr>
+                        {% endif %}
+                    {% endfor %}
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>
+
+<section onload="missing_cookie();">
+  <div class="container">
+    <div class="row align-items-center">
+      <div class="col-lg-6 order-lg-2">
+        <div class="ps-2 pe-2 pt-5 pb-5" id="sect">
+            <div style="border: solid 1px;border-color: #4682B4;border-radius: 5px;" data-aos="fade-down" data-aos-once="true" data-aos-duration="800" data-aos-delay="10">
+                <table id="raw_t" class="table text-break mb-0 bg-white" style="table-layout: fixed;">
+                    <thead style="background-color: #4682B4; color: white;font-size: 16px">
+                        <tr>
+                            <th scope="col" class="w-25">Name</th>
+                            <th scope="col">Value</th>
+                        </tr>
+                    </thead>
+                    <tbody style="font-size: 14px">
+                        {% for header,value in Raw_headers %}
+                            {% if header.lower == "Set-Cookie"|lower %}
+                                {% if not cookies.trans_https or not cookies.httponly or not cookies.samesite %}
+                                    <tr>
+                                        <th scope="row"><a style="color: red;" data-toggle="tooltip" title="Cookies are configured incorrectly!">{{ header }}</a></th>
+                                        <td>{{ value }}</td>
+                                    </tr>
+                                {% else %}
+                                    <tr>
+                                        <th scope="row">{{ header }}</th>
+                                        <td>{{ value }}</td>
+                                    </tr>
+                                {% endif %}
+                            {% else %}
+                                <tr>
+                                    <th scope="row">{{ header }}</th>
+                                    <td>{{ value }}</td>
+                                </tr>
+                            {% endif %}
+                        {% endfor %}
+                    </tbody>
+                </table>
+            </div>
+        </div>
+      </div>
+      <div class="col-lg-6 order-lg-1">
+        <div class="ps-2 pe-2 pt-5 pb-5" id="sect">
+            <h2 class="display-5"><strong>Raw Headers</strong></h2>
+            <p class="text-justify">In the client-server architecture, HTTP headers (HTTP) play a very key role they are included in every request sent by the client and each response sent back from the server.
+                They help in sending additional information with each request and response, in case of request headers these include information about resources that will be fetched or may contain information about the user who is requesting the resources.
+                While response headers contain information about the server who is sending a response back to the client.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section>
+  <div class="container">
+    <div class="row align-items-center">
+      <div class="col-lg-6 order-lg-1">
+        <div class="ps-2 pe-2 pt-5 pb-5" id="sect">
+            <div style="border: solid 1px;border-color: #4682B4;border-radius: 5px;" data-aos="fade-down" data-aos-once="true" data-aos-duration="800" data-aos-delay="10">
+                <table class="table text-break mb-0 bg-white" style="table-layout: fixed">
+                    <thead style="background-color: #4682B4;color: white;font-size: 16px">
+                        <tr>
+                            <th scope="col" class="w-25">Name</th>
+                            <th scope="col">Status</th>
+                            <th scope="col">Threat</th>
+                        </tr>
+                    </thead>
+                    <tbody style="font-size: 14px">
+                        {% for header,value in Security_headers %}
+                            {% if value == "Missing" %}
+                                <tr>
+                                    <th scope="row">{{ header }}</th>
+                                    <td style="color: red"><a data-toggle="tooltip" title="Header Missing"><img src="{% static 'images/missing.svg' %}" style="height: 25px;width: 25px;"></a>&nbsp;&nbsp;Missing</td>
+                                    <td><div class="d-inline text-white p-1 rounded-3 " style="background-color: #4682B4;">MEDIUM</div></td>
+                                </tr>
+                            {% else %}
+                                <tr>
+                                    <th scope="row">{{ header }}</th>
+                                    <td style="color: green"><a data-toggle="tooltip" title="Header Found"><img src="{% static 'images/correct.svg' %}" style="height: 25px;width: 25px;"></a>&nbsp;&nbsp;Present</td>
+                                    <td></td>
+                                </tr>
+                            {% endif %}
+                        {% endfor %}
+                    </tbody>
+                </table>
+            </div>
+        </div>
+      </div>
+      <div class="col-lg-6 order-lg-2">
+        <div class="ps-2 pe-2 pt-5 pb-5" id="sect">
+            <h2 class="display-5"><strong>Security Headers</strong></h2>
+            <p class="text-justify">Security headers are a type of headers that provide protection to web applications from various attacks including session hijacking, click-jacking, and eavesdropping.
+                V-Scanner will check for important security headers and will inform the user about missing headers that should be part of the application in order to avoid the possibility of various vulnerabilities.
+            </p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section>
+  <div class="container">
+    <div class="row align-items-center">
+      <div class="col-lg-6 order-lg-2">
+        <div class="ps-2 pe-2 pt-5 pb-5" id="sect">
+            <div style="border: solid 1px;border-color: #4682B4;border-radius: 5px;" data-aos="fade-down" data-aos-once="true" data-aos-duration="800" data-aos-delay="10">
+                <table class="table mb-0 bg-white" style="table-layout: fixed">
+                    <thead class="mb-0" style="background-color: #c69817; color: white;font-size: 16px">
+                        <tr>
+                            <th scope="col" class="w-25">Name</th>
+                            <th scope="col">Status</th>
+                            <th scope="col">Links</th>
+                            <th scope="col">Severity</th>
+                        </tr>
+                    </thead>
+                    <tbody style="font-size: 14px">
+                        {% if xss.status == True %}
+                            {# status and number of links infected #}
+                            <tr>
+                                <th scope="row">Cross-site Scripting</th>
+                                <td id="xss_status" style="color: red;">{{ xss.status }}</td>
+                                <td>{{ xss.no_links }}</td>
+                                <td><div class="d-inline text-white p-1 rounded-3 ms-2" style="background-color: #e83737;">HIGH</div></td>
+                            </tr>
+                        {% else %}
+                            <tr>
+                                <th scope="row">Cross-site Scripting</th>
+                                <td id="xss_status" style="color: green;">False</td>
+                                <td>0</td>
+                                <td></td>
+                            </tr>
+                        {% endif %}
+
+                        {% if sqli.status == True %}
+                            {# status and number of links infected #}
+                            <tr>
+                                <th scope="row">SQL Injection</th>
+                                <td style="color: red;">{{ sqli.status }}</td>
+                                <td>{{ sqli.no_links }}</td>
+                                <td><div class="d-inline text-white p-1 rounded-3 ms-2" style="background-color: #e83737;">HIGH</div></td>
+                            </tr>
+                        {% else %}
+                            <tr>
+                                <th scope="row">SQL Injection</th>
+                                <td style="color: green;">False</td>
+                                <td>0</td>
+                                <td></td>
+                            </tr>
+                        {% endif %}
+
+                        {% if csrf.status == True %}
+                            {# status and number of links infected #}
+                            <tr>
+                                <th scope="row">Cross-site Request Forgery</th>
+                                <td id="csrf_status" style="color: red;">{{ csrf.status }}</td>
+                                <td>{{ csrf.no_links }}</td>
+                                <td><div class="d-inline text-white p-1 rounded-3" style="background-color: #4682B4;">MEDIUM</div></td>
+                            </tr>
+                        {% else %}
+                            <tr>
+                                <th scope="row">Cross-site Request Forgery</th>
+                                <td id="csrf_status" style="color: green;">False</td>
+                                <td>0</td>
+                                <td></td>
+                            </tr>
+                        {% endif %}
+
+                        {% if cj.status == True %}
+                            {# status and number of links infected #}
+                            <tr>
+                                <th scope="row">Frame Injection</th>
+                                <td id="cj_status" style="color: red;">{{ cj.status }}</td>
+                                <td>{{ cj.no_links }}</td>
+                                <td><div class="d-inline text-white p-1 rounded-3 " style="background-color: #4682B4;">MEDIUM</div></td>
+                            </tr>
+                        {% else %}
+                            <tr>
+                                <th scope="row">Frame Injection</th>
+                                <td id="cj_status" style="color: green;">False</td>
+                                <td></td>
+                                <td></td>
+                            </tr>
+                        {% endif %}
+                    </tbody>
+                </table>
+            </div>
+        </div>
+      </div>
+      <div class="col-lg-6 order-lg-1">
+        <div class="ps-2 pe-2 pt-5 pb-5" id="sect">
+            <h2 class="display-5"><strong>Vulnerabilities</strong></h2>
+            <p class="text-justify">A vulnerability is the most common cause in compromising the website, its kind of a security hole in the website that allow an attacker to do things like stealing senstive information, unauthorized access and a lot of other malicious activities. Some of the most dangerous vulnerabilities are Cross-site Scripting (XSS), SQL Injection (SQLi) and Cross-site request forgery (CSRF).</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section>
+  <div class="container">
+    <div class="row align-items-center">
+      <div class="col-lg-6 order-lg-1">
+        <div class="ps-2 pe-2 pt-5 pb-5" id="sect">
+            <div style="border: solid 1px;border-color: #4682B4;border-radius: 5px;" data-aos="fade-down" data-aos-once="true" data-aos-duration="800" data-aos-delay="10">
+                <table class="table mb-0 bg-white" style="table-layout: fixed">
+                    <thead class="mb-0" style="background-color: #7A7676; color: white;font-size: 16px">
+                        <tr>
+                            <th scope="col" class="w-25">Port</th>
+                            <th scope="col">Status</th>
+                            <th scope="col">Service</th>
+                            <th scope="col">Threat</th>
+                        </tr>
+                    </thead>
+                    <tbody style="font-size: 14px">
+                    {% for key,val in ports.items %}
+                        {% if key != "os"%}
+                            {% if key in risky_p%}
+                            <tr>
+                                <th scope="row">{{ key }}</th>
+                                <td id="port_status" ><div class="d-inline bg-warning text-white p-1 rounded-3">OPEN</div></td>
+                                <td>{{ val.service.upper }}</td>
+                                <td><div class="d-inline text-white p-1 rounded-3 " style="background-color: #4682B4;">MEDIUM</div></td>
+                            </tr>
+                            {% else %}
+                                <tr>
+                                    <th scope="row">{{ key }}</th>
+                                    <td id="port_status" ><div class="d-inline bg-warning text-white p-1 rounded-3">OPEN</div></td>
+                                    <td>{{ val.service.upper }}</td>
+                                    <td><div class="d-inline text-white p-1 rounded-3 ms-2" style="background-color: #67b6f7;">LOW</div></td>
+                                </tr>
+                            {% endif %}
+                        {% endif %}
+                    {% endfor %}
+                    <tr>
+                        <td>Used Technologies&nbsp;</td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                    </tr>
+                    {% for tech,value in Technologies %}
+                        {% if value == "Linux" %}
+                            <tr>
+                                <th scope="row">{{ tech }}</th>
+                                <td>{{ value }}&nbsp;&nbsp;<img src="{% static 'images/linux.svg' %}" style="height: 25px;width: 25px"></td>
+                                <td></td>
+                                <td><div class="d-inline text-white p-1 rounded-3 ms-2" style="background-color: #b2b2a0;">INFO</div></td>
+                            </tr>
+                        {% elif value == "Windows" %}
+                            <tr>
+                                <th scope="row">{{ tech }}</th>
+                                <td>{{ value }}&nbsp;&nbsp;<img src="{% static 'images/windows.svg' %}" style="height: 25px;width: 25px"></td>
+                                <td></td>
+                                <td><div class="d-inline text-white p-1 rounded-3 ms-2" style="background-color: #b2b2a0;">INFO</div></td>
+                            </tr>
+                        {% else %}
+                            {% if tech == "Jquery" and value != None%}
+                                {% if value.0 == 'outdated' %}
+                                    <tr>
+                                        <th scope="row">Jquery</th>
+                                        <td>{{ value.1 }} (Outdated)</td>
+                                        <td></td>
+                                        <td><div class="d-inline text-white p-1 rounded-3 ms-2" style="background-color: #e83737;">HIGH</div></td>
+                                    </tr>
+                                {% elif value.0 == 'up-to-date' %}
+                                    <tr>
+                                        <th scope="row">Jquery</th>
+                                        <td>{{ value.1 }}</td>
+                                        <td></td>
+                                        <td><div class="d-inline text-white p-1 rounded-3 ms-2" style="background-color: #b2b2a0;">INFO</div></td>
+                                    </tr>
+                                {% endif %}
+                            {% elif value == None %}
+        {#                        pass #}
+                            {% else %}
+                                <tr>
+                                    <th scope="row">{{ tech }}</th>
+                                    <td>{{ value }}</td>
+                                    <td></td>
+                                    <td><div class="d-inline text-white p-1 rounded-3 ms-2" style="background-color: #b2b2a0;">INFO</div></td>
+                                </tr>
+                            {% endif %}
+                        {% endif %}
+                    {% endfor %}
+                    </tbody>
+                </table>
+            </div>
+        </div>
+      </div>
+      <div class="col-lg-6 order-lg-2">
+        <div class="ps-2 pe-2 pt-5 pb-5" id="sect">
+            <h2 class="display-5"><strong>Footprinting</strong></h2>
+            <p class="text-justify">Footprinting is gathering information about the target, in this phase an attacker perform various techniques to determine the underlying services and technologies used by the target.
+              This information about the target can be very helpful while planning an attack against the target. Port scanning is often used while doing footprinting because it gives information about the open ports and services running on these ports.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+<footer class="py-4 bg-black">
+    <div class="container"><p class="text-center text-white m-0 small">Copyright&nbsp;© Brand 2022</p></div>
+</footer>
+{% endblock content %}

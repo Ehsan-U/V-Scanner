@@ -1,0 +1,6 @@
+Module1.xss INFO start_xss [+] XSS Discovered in Parameter http://testphp.vulnweb.com/showimage.php?file=<script>alert(9)</script>
+Module1.xss INFO start_xss [+] XSS Discovered in Parameter http://testphp.vulnweb.com/listproducts.php?artist=<script>alert(9)</script>
+Module1.xss INFO start_xss [+] XSS Discovered in Parameter http://testphp.vulnweb.com/hpp/?pp=<script>alert(9)</script>
+Module1.xss INFO start_xss [+] XSS Discovered in Parameter http://testphp.vulnweb.com/listproducts.php?cat=<script>alert(9)</script>
+Module1.xss INFO start_xss [+] XSS Discovered in Parameter http://testphp.vulnweb.com/hpp/params.php?p=<script>alert(9)</script>&pp=<script>alert(9)</script>
+Module1.xss INFO start_xss [+] XSS Discovered in Parameter http://testphp.vulnweb.com/showimage.php?file=<script>alert(9)</script>&size=<script>alert(9)</script>

@@ -1,0 +1,12 @@
+@page {size: A4; margin: 0.4cm;background-color: black;}
+
+@media print {
+    #page_break {
+        page-break-before:always;
+    }
+    #page1 {
+        height: 1115px;
+        color: white;
+        margin:0px;
+    }
+}
