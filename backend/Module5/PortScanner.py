@@ -37,7 +37,7 @@ class PortScanner():
             self.queue.put(port)
 
     def load_ports(self):
-        with open("/home/lubuntu/PycharmProjects/V/backend/ports.json","r") as f:
+        with open("/home/ubuntu/backend/ports.json","r") as f:
             top_1000_str = json.load(f)
             # return list
             ports = json.loads(top_1000_str)

@@ -29,7 +29,7 @@ def result(request):
     if request.method.lower() == 'post':
         req_url = request.POST.get("search").strip().encode('utf-8')
         filename = hashlib.md5(req_url).hexdigest()
-        datafile = f'/home/lubuntu/PycharmProjects/V/FYP/result_data/{filename}.json'
+        datafile = f'/home/ubuntu/FYP/result_data/{filename}.json'
         data = get_data(request)
         if os.path.exists(datafile):
             os.remove(datafile)
@@ -39,7 +39,7 @@ def result(request):
     elif request.method.lower() == 'get':
         req_url = request.GET.get("target",'None').encode('utf-8')
         filename = hashlib.md5(req_url).hexdigest()
-        datafile = f'/home/lubuntu/PycharmProjects/V/FYP/result_data/{filename}.json'
+        datafile = f'/home/ubuntu/FYP/result_data/{filename}.json'
         if os.path.exists(datafile):
             with open(datafile,'r') as f:
                 data = json.load(f)
@@ -275,7 +275,7 @@ def find_score(sec_headers,cookies,target,vulners):
 
 def fetch_pdf(request):
     if request.headers.get("Host") == 'vscanner.me':
-        pdf = "/home/lubuntu/PycharmProjects/V/backend/report.pdf"
+        pdf = "/home/ubuntu/backend/report.pdf"
         return FileResponse(open(pdf,"rb"),as_attachment=True,content_type="application/json")
     else:
         context = {"code":[4,0,4],"error":"Not Found"}
@@ -283,7 +283,7 @@ def fetch_pdf(request):
 
 def v_inputs(request):
     if request.headers.get("Host") == 'vscanner.me':
-        vulner_inputs = "/home/lubuntu/PycharmProjects/V/backend/vulnerable_inputs.json"
+        vulner_inputs = "/home/ubuntu/backend/vulnerable_inputs.json"
         opened = open(vulner_inputs,'r')
         content_type = 'application/json'
         response = HttpResponse(opened,content_type=content_type)
