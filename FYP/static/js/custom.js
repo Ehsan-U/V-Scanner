@@ -32,20 +32,38 @@ function validate() {
     }
 }
 
+function getCookie(name) {
+    let cookieValue = null;
+    if (document.cookie && document.cookie !== '') {
+        const cookies = document.cookie.split(';');
+        for (let i = 0; i < cookies.length; i++) {
+            const cookie = cookies[i].trim();
+            // Does this cookie string begin with the name we want?
+            if (cookie.substring(0, name.length + 1) === (name + '=')) {
+                cookieValue = decodeURIComponent(cookie.substring(name.length + 1));
+                break;
+            }
+        }
+    }
+    return cookieValue;
+}
+
+
 function send_req() {
     valid = validate()
     if (valid) {
         loader()
-        const csrftoken = Cookies.get('csrftoken');
+        // const csrftoken = Cookies.get('csrftoken');
+        const csrftoken = getCookie('csrftoken');
         url = $('#url').val()
         selection = $('#selection').val()
         $.ajax({
             'type':'POST',
-            'url':'https://vscanner.me/result/',
+            'url':'http://51.142.96.116/result/',
             'data':{'search':url,'selection':selection,'csrfmiddlewaretoken':csrftoken},
             success:function(response) {
                 loader(true) 
-                window.location = `https://vscanner.me/result/?target=${url}`
+                window.location = `http://51.142.96.116/result/?target=${url}`
             }
             
         })
@@ -168,4 +186,3 @@ function responsive_grades() {
     }
 }
 
-viewer = Django_Class()

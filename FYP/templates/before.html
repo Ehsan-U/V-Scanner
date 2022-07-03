@@ -6,7 +6,7 @@
       <div class="masthead-content">
         <div class="container">
           <h1 class="masthead-heading mb-1" data-aos="fade-down" data-aos-once="true" data-aos-duration="800" data-aos-delay="100">Scan your website</h1>
-          <div class="form-check-inline">
+          <div class="form-check-inline">{% csrf_token %}
             <div id="scan_form" class="d-line-block">
               <div id="url_div">
                 <input name="search" type="text" class="form-control" maxlength="100" id="url" placeholder="http://example.com">

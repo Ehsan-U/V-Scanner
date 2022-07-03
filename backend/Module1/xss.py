@@ -22,9 +22,8 @@ class Xss():
     def __init__(self):
         self.queue = queue.Queue()
 
-    def main(self,urls,forms_d,vulnerabilities,depth,headers):
+    def main(self,urls,forms_d,vulnerabilities,depth,headers,lock):
         self.vulnerabilities = vulnerabilities
-        lock = threading.Lock()
         if not headers['Security-Headers']['X-XSS-Protection']:
             session = HTMLSession()
             if urls:
@@ -179,6 +178,8 @@ class Xss():
 
     def run(self,session,flag,lock):
         threads = []
+        # try 
+        # threadpool
         for i in range(50):
             item = self.queue.get()
             t = threading.Thread(target=self.start_xss,args=(session,item,flag,lock))

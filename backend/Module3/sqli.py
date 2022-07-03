@@ -21,9 +21,8 @@ class SQLi():
     def __init__(self):
         self.queue = queue.Queue()
 
-    def main(self,urls,forms_d,vulnerabilities,depth):
+    def main(self,urls,forms_d,vulnerabilities,depth,lock):
         self.vulnerabilities = vulnerabilities
-        lock = threading.Lock()
         session = HTMLSession()
         if urls:
             urls = self.decide_limits(urls,forms_d,depth)

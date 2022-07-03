@@ -330,7 +330,7 @@ class FYP_Crawler():
             thr.join()
         # check whether queue is empty, if not then continue
         if not self.queue.empty():
-            if not self.depth and len(self.urls) <= 1000:
+            if not self.depth and len(self.urls) <= 500:
                 self.run(lock)
             elif self.depth and len(self.urls) <=2000:
                 self.run(lock)

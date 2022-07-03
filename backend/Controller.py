@@ -62,20 +62,20 @@ class Controller():
                 print("Checking Links")
                 # logger.info("Checking Links")
                 # asyncio.run(xs.main(param_urls,None,vulnerabilities,depth,headers_info))
-                xs.main(param_urls,None,vulnerabilities,depth,headers_info)
+                xs.main(param_urls,None,vulnerabilities,depth,headers_info,lock)
                 vulnerabilities = xs.vulnerabilities
                 # asyncio.run(sqli.main(param_urls,None,vulnerabilities,depth))
-                sqli.main(param_urls,None,vulnerabilities,depth)
+                sqli.main(param_urls,None,vulnerabilities,depth,lock)
                 vulnerabilities = sqli.vulnerabilities
             # xss,sqli,csrf forms
             if len(forms_d.get("forms")) > 0:
                 print("Checking Forms")
                 # logger.info("Checking Forms")
                 # asyncio.run(xs.main(None,forms_d,vulnerabilities,depth,headers_info))
-                xs.main(None,forms_d,vulnerabilities,depth,headers_info)
+                xs.main(None,forms_d,vulnerabilities,depth,headers_info,lock)
                 vulnerabilities = xs.vulnerabilities
                 # asyncio.run(sqli.main(None,forms_d,vulnerabilities,depth))
-                sqli.main(None,forms_d,vulnerabilities,depth)
+                sqli.main(None,forms_d,vulnerabilities,depth,lock)
                 vulnerabilities = sqli.vulnerabilities
                 csrf.check_csrf(forms_d,vulnerabilities,headers_info,depth)
                 vulnerabilities = csrf.vulnerabilities
@@ -457,11 +457,10 @@ def result(item:Item):
     start_counter = item.start_counter
     url = item.target
     depth = item.depth.lower()
-    if depth == 'true':
+    if depth.lower() == 'true':
         depth = True
-    elif depth == 'false':
+    elif depth.lower() == 'false':
         depth = False
-    print(depth)
     controller = Controller()
     try:
         results = controller.main(url,depth,start_time,start_counter)
