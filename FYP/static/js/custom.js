@@ -59,11 +59,11 @@ function send_req() {
         selection = $('#selection').val()
         $.ajax({
             'type':'POST',
-            'url':'http://51.142.96.116/result/',
+            'url':'http://127.0.0.1:8000/result/',
             'data':{'search':url,'selection':selection,'csrfmiddlewaretoken':csrftoken},
             success:function(response) {
                 loader(true) 
-                window.location = `http://51.142.96.116/result/?target=${url}`
+                window.location = `http://127.0.0.1:8000/result/?target=${url}`
             }
             
         })

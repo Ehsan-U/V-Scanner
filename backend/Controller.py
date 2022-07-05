@@ -4,8 +4,6 @@ import datetime as dt
 import os
 import socket
 from urllib.parse import urlparse # stream implementation
-from django.http import HttpResponse
-from django.template.loader import get_template
 import jinja2
 import matplotlib
 import matplotlib.pyplot as plt
@@ -30,16 +28,19 @@ from sklearn.metrics import accuracy_score
 from flask import Flask, jsonify,request
 from fastapi import FastAPI
 from pydantic import BaseModel
+from builtwith import builtwith
+
 
 class Controller():
     def __init__(self):
         self.responses = []
         self.jquery_data = {}
 
+
     def chk_headers(self,url):
         checker = Header_Manipulation(url)
         return checker.check_headers()
-
+   
     def main(self,url,depth,start_time,start_counter):
         crawl = FYP_Crawler(url,depth)
         headers_info = self.chk_headers(url)
@@ -49,7 +50,6 @@ class Controller():
         p_scan = PortScanner(url)
         lock = threading.Lock()
         try:
-            # print("\r[+] Crawling",end="")
             crawl.manage_req(lock)
             # headers manipulation *returns missing security headers
             vulnerabilities = crawl.vulnerabilities
@@ -201,7 +201,7 @@ class Controller():
         # cookies already there above
         template_loader = jinja2.FileSystemLoader("/")
         template_Env = jinja2.Environment(loader=template_loader)
-        template_file = "/home/ubuntu/backend/Misc/report.html"
+        template_file = "/home/lubuntu/PycharmProjects/V/backend/Misc/report.html"
         template = template_Env.get_template(template_file)
         output = template.render(
             host = target,
@@ -221,8 +221,8 @@ class Controller():
             warningss = warningss
         )
         # delete already present files
-        filehtml = "/home/ubuntu/backend/report.html"
-        filepdf = "/home/ubuntu/backend/report.pdf"
+        filehtml = "/home/lubuntu/PycharmProjects/V/backend/report.html"
+        filepdf = "/home/lubuntu/PycharmProjects/V/backend/report.pdf"
         if os.path.exists(filehtml) and os.path.exists(filepdf):
             os.remove(filehtml)
             os.remove(filepdf)
@@ -231,12 +231,12 @@ class Controller():
         else:
             print("Files not present")
             # logger.info("[+] File not present")
-        html_path = f'/home/ubuntu/backend/report.html'
+        html_path = f'/home/lubuntu/PycharmProjects/V/backend/report.html'
         html_file = open(html_path, 'w')
         html_file.write(output)
         html_file.close()
         # issue of report
-        HTML('/home/ubuntu/backend/report.html').write_pdf('/home/ubuntu/backend/report.pdf', stylesheets=['/home/ubuntu/FYP/static/css/report.css'])
+        HTML('/home/lubuntu/PycharmProjects/V/backend/report.html').write_pdf('/home/lubuntu/PycharmProjects/V/backend/report.pdf', stylesheets=['/home/lubuntu/PycharmProjects/V/FYP/static/css/report.css'])
         # save vulnerable inputs
         self.save_inputs(xss,sqli,csrf)
 
@@ -371,7 +371,7 @@ class Controller():
             "sqli":{"vulnerable parameters":[sqli['p-links']],"vulnerable_forms":sqli['f-links']},
             "csrf":{"vulnerable_forms":[csrf['f-links']]}
         }
-        with open("/home/ubuntu/backend/vulnerable_inputs.json",'w') as f:
+        with open("/home/lubuntu/PycharmProjects/V/backend/vulnerable_inputs.json",'w') as f:
             json.dump(v_inputs,f)
 
     ##### Generate Chart #####
@@ -409,7 +409,7 @@ class Controller():
         ax1.pie(sizes,labels=labels,colors=colors,autopct='%1.1f%%',shadow=True,startangle=90)
         ax1.axis("equal")
         plt.legend()
-        plt.savefig("/home/ubuntu/FYP/chart.png",bbox_inches='tight')
+        plt.savefig("/home/lubuntu/PycharmProjects/V/FYP/chart.png",bbox_inches='tight')
         plt.close(fig1)
 
     def find_ratings(self,vulners,security_headers,risky_ports,csrf,cj,ports,Technologies):

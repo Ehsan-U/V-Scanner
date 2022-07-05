@@ -1,14 +1,14 @@
+import ast
 import importlib
+import subprocess
 import requests_html
 import requests
-# from pprint import pprint
-# from rich.traceback import install
 from rich.console import Console
 # install()
 r = Console()
 from . import wpdetect
 from urllib.parse import urlparse
-from builtwith import builtwith
+
 
 import logging
 # ################logging#############
@@ -30,11 +30,10 @@ class Header_Manipulation():
         self.headers_info = {"Raw-Headers":"","Security-Headers":{},"Server":[False],"Technology":[False],"Framework":[False],"Cookies":{'trans_https':False,'httponly':False,'samesite':False,"cookies":False}}
 
     def check_headers(self):
-        # print("\rHeaders",end="")
         session = requests_html.HTMLSession()
         security_headers = ['X-Frame-Options','Content-Security-Policy','Strict-Transport-Security','X-Content-Type-Options','X-XSS-Protection']
         try:
-            resp = session.get(self.url, headers={'User-Agent': self.user_agent}, timeout=3, allow_redirects=True)
+            resp = session.get(self.url, headers={'User-Agent': self.user_agent}, timeout=2, allow_redirects=True)
         except:
             r.print_exception()
             # logger.exception("Error in check_headers (Headers)")
@@ -198,10 +197,10 @@ class Header_Manipulation():
                 self.headers_info["Technology"][0] = True
                 self.headers_info["Technology"].append("Wordpress")
                 self.headers_info["Technology"].append("The server is leaking the senstive information about technology")
-
-        # trying to find technology via builtwith
-        try:
-            site_data = builtwith(self.url)
+        outputt = subprocess.check_output(['python3', 'builtw.py', '-u', f'{self.url}', '-a', f'{self.user_agent}'],shell=False)
+        site_data = ast.literal_eval(outputt.decode("utf-8"))
+        if bool(site_data):
+            print('FLAG TRUE')
             if not self.headers_info["Technology"][0]:
                 try:
                     # return None if not found
@@ -238,10 +237,8 @@ class Header_Manipulation():
                     r.print_exception()
                     print("error in senstive_info")
                     # logger.exception("Error in senstive_info() (Headers)")
-        except:
-            r.print_exception()
-            print("error in senstive_info")
-            # logger.exception("Error in senstive_Info() (Headers)")
+
+        
         return self.headers_info
 
     # checking csp in meta tags
@@ -252,7 +249,7 @@ class Header_Manipulation():
         for head,val in security_headers.items():
             if head == "Content-Security-Policy" and val == False:
                 try:
-                    resp = requests.get(self.url).text
+                    resp = requests.get(self.url,timeout=2,headers={'User-Agent':self.user_agent}).text
                 except:
                     pass
                 else:

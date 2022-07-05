@@ -19,6 +19,21 @@
 #             else:
 #                 allow = True
 #         assert allow == True
-import requests
-resp = requests.get("http://www.aiou.edu.pk/")
-print(resp.text)
+from itertools import count
+from multiprocessing import Process
+
+counter = count(0)
+def get_Tech():
+    from builtwith import builtwith
+    resp = builtwith("https://www.olx.com.pk/")
+    print(resp)
+print(__name__)
+# if __name__ == '__main__':
+#     p1 = Process(target=get_Tech,name='tech')
+#     p1.start()
+#     p1.join(timeout=2)
+#     p1.terminate()
+# if p1.exitcode == 0:
+#     print("YES")
+# elif p1.exitcode == None:
+#     print("NO")
