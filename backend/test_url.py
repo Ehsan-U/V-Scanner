@@ -19,15 +19,15 @@
 #             else:
 #                 allow = True
 #         assert allow == True
-from itertools import count
-from multiprocessing import Process
+# from itertools import count
+# from multiprocessing import Process
 
-counter = count(0)
-def get_Tech():
-    from builtwith import builtwith
-    resp = builtwith("https://www.olx.com.pk/")
-    print(resp)
-print(__name__)
+# counter = count(0)
+# def get_Tech():
+#     from builtwith import builtwith
+#     resp = builtwith("https://www.olx.com.pk/")
+#     print(resp)
+# print(__name__)
 # if __name__ == '__main__':
 #     p1 = Process(target=get_Tech,name='tech')
 #     p1.start()
@@ -37,3 +37,11 @@ print(__name__)
 #     print("YES")
 # elif p1.exitcode == None:
 #     print("NO")
+# from requests_html import HTMLSession
+# s = HTMLSession()
+# proxy = {
+#     'http':'147.182.207.3:3128',
+#     'https':'147.182.207.3:3128',
+# }
+# resp = s.get('https://httpbin.org/ip',proxies=proxy)
+# print(resp.text)

@@ -62,10 +62,13 @@ function send_req() {
             'url':'http://127.0.0.1:8000/result/',
             'data':{'search':url,'selection':selection,'csrfmiddlewaretoken':csrftoken},
             success:function(response) {
-                loader(true) 
+                loader(true)
                 window.location = `http://127.0.0.1:8000/result/?target=${url}`
+            },
+            error: function(XMLHttpRequest, textStatus, errorThrown) {
+                loader(true)
             }
-            
+
         })
     }
     else {
@@ -185,4 +188,3 @@ function responsive_grades() {
         }
     }
 }
-
