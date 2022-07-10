@@ -20,6 +20,7 @@ import matplotlib.pyplot as plt
 import copy
 import os
 import hashlib
+from filelock import FileLock
 
 
 def home(request):
@@ -31,10 +32,12 @@ def result(request):
         filename = hashlib.md5(req_url).hexdigest()
         datafile = f'/home/lubuntu/PycharmProjects/V/FYP/result_data/{filename}.json'
         data = get_data(request)
-        if os.path.exists(datafile):
-            os.remove(datafile)
-        with open(datafile,'w') as f:
-            json.dump(data,f)
+        lock = FileLock(datafile,timeout=2)
+        with lock:
+            if os.path.exists(datafile):
+                os.remove(datafile)
+            with open(datafile,'w') as f:
+                json.dump(data,f)
         return HttpResponse('OK')
     elif request.method.lower() == 'get':
         req_url = request.GET.get("target",'None').encode('utf-8')
