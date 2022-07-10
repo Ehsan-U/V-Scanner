@@ -10,7 +10,7 @@
             font-family: "Eczar";
         }
     </style>
-    <title>{{ title }}</title>
+    <title></title>
 </head>
 
 <body style="color: black;">
@@ -23,10 +23,10 @@
 
         <div class="container text-center" style="margin-top: 8rem;">
             <p style="font-size: 28px">Scan Report</p>
-            <p>{{ date }}</p>
+            <p>July 10, 2022</p>
             <h6 id="summary" style="margin-top: 3rem;font-weight: bolder">Summary</h6>
-            <p style="text-align: justify;margin-left: 10px;margin-right: 10px;margin-top: 1rem;">This document reports on the results of an automatic security scan. The scan started at {{start}}
-                 and ended at {{end}}. The report first
+            <p style="text-align: justify;margin-left: 10px;margin-right: 10px;margin-top: 1rem;">This document reports on the results of an automatic security scan. The scan started at 2022:07:10 14:50:12
+                 and ended at 2022:07:10 14:50:31. The report first
                 summarises the results found. Then, for target host, the report describes every issue found.
                 Please consider the advice given in each description, in order to rectify the issue.
             </p>
@@ -139,23 +139,23 @@
 
         <div class="container">
             <div class="mt-5 mb-5 text-center pt-1" style="background-color: #5b6467;background-image: linear-gradient(315deg, #5b6467 0%, #8b939a 74%);color: white">
-                <h2>{{host}}</h2>
+                <h2>http://lms.ue.edu.pk</h2>
             </div>
             <div class="row" >
                 <div class="col-4 " style="width: 10rem;margin-left: 5px;">
                     <h5 style="color: darkblue;font-size: 20px">Overall risk level:</h5>
-                    <p class="rounded-3" style="background-color: {{severity.color}};color: white;font-size: 20px;text-align: center;width: 120px;margin-left: 1rem;margin-top: 15px;">{{severity.status}}</p>
+                    <p class="rounded-3" style="background-color: #e83737;color: white;font-size: 20px;text-align: center;width: 120px;margin-left: 1rem;margin-top: 15px;">High</p>
                 </div>
                 <div class="col-4 text-center" style="width: 15rem;margin-left:25px">
                     <h5 style="color: darkblue;font-size: 20px;">Issues Ratio:</h5>
-                    <img src="/home/lubuntu/PycharmProjects/V/FYP/charts/{{chart}}.png" style="height: 250px;width: 250px;margin-top: 15px;">
+                    <img src="/home/lubuntu/PycharmProjects/V/FYP/charts/lms.ue.edu.pk.png" style="height: 250px;width: 250px;margin-top: 15px;">
                 </div>
                 <div class="col-4 ms-4 " style="width: 275px;">
                     <h5 style="color: darkblue;font-size: 20px;margin-left: 1rem;padding-left: 2rem;margin-bottom: 15px;">Scan Information:</h5>
-                    <p style="margin-left: 1rem;font-size: 14px;padding-left: 2rem;" >Start Time:&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; {{start}} </p>
-                    <p style="line-height: 6px;margin-left: 1rem;font-size: 14px;padding-left: 2rem;">Finish Time:&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; {{end}} </p>
-                    <p style="margin-left: 1rem;font-size: 14px;padding-left: 2rem;">Scan Duration:&nbsp;&nbsp; {{duration}}</p>
-                    <p style="margin-left: 1rem;font-size: 14px;padding-left: 2rem;">Crawled Pages:&nbsp;&nbsp; {{crawled_links}}</p>
+                    <p style="margin-left: 1rem;font-size: 14px;padding-left: 2rem;" >Start Time:&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 2022:07:10 14:50:12 </p>
+                    <p style="line-height: 6px;margin-left: 1rem;font-size: 14px;padding-left: 2rem;">Finish Time:&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 2022:07:10 14:50:31 </p>
+                    <p style="margin-left: 1rem;font-size: 14px;padding-left: 2rem;">Scan Duration:&nbsp;&nbsp; 0 min, 17 sec</p>
+                    <p style="margin-left: 1rem;font-size: 14px;padding-left: 2rem;">Crawled Pages:&nbsp;&nbsp; 15</p>
                     <p class="d-inline" style="line-height: 6px;margin-left: 1rem;font-size: 14px;padding-left: 2rem;">Scan Status:&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <p class="d-inline p-1" style="background-color: #0c4128;color: white;">Finished</p></p>
                 </div>
             </div>
@@ -166,7 +166,7 @@
         <div class="container">
             <div class="mt-4 mb-4">
                 <h2 style="margin-bottom: 15px;">Results For Target</h2>
-                <img src="/home/lubuntu/PycharmProjects/V/FYP/static/images/arrow.svg" style="height: 25px;width: 25px;display: inline;padding-bottom: 5px;"><h5 style="display: inline;color:darkblue;">&nbsp;{{ target_ip }}&nbsp;</h5><img src="/home/lubuntu/PycharmProjects/V/FYP/static/images/arrow.svg" style="height: 25px;width: 25px;display: inline;padding-bottom: 5px;"><h5 style="display: inline;">&nbsp;Headers</h5>
+                <img src="/home/lubuntu/PycharmProjects/V/FYP/static/images/arrow.svg" style="height: 25px;width: 25px;display: inline;padding-bottom: 5px;"><h5 style="display: inline;color:darkblue;">&nbsp;59.103.250.60&nbsp;</h5><img src="/home/lubuntu/PycharmProjects/V/FYP/static/images/arrow.svg" style="height: 25px;width: 25px;display: inline;padding-bottom: 5px;"><h5 style="display: inline;">&nbsp;Headers</h5>
                 <hr style="color:orange; height: 3px;margin-bottom: 20px;">
             </div>
 
@@ -181,7 +181,7 @@
                             </tr>
                         </thead>
                         <tbody>
-                            {% if security_headers.csp == "Missing" %}
+                            
                                 <tr>
                                     <td><h6  style="display: inline-block;">Description:</h6><br>Control the loading of resources in a website and block any request that is intended for malicious or unknown resource.</td>
                                 </tr>
@@ -197,24 +197,7 @@
                                 <tr>
                                     <td><h6 style="display: inline-block;">Reference: <br><a href="https://developer.mozilla.org/en-US/docs/Web/HTTP/CSP">https://developer.mozilla.org/en-US/docs/Web/HTTP/CSP</a></td>
                                 </tr>
-                            {% else %}
-                                <tr>
-                                    <td><h6  style="display: inline-block;">Description:</h6><br>Control the loading of resources in a website and block any request that is intended for malicious or unknown resource.</td>
-                                </tr>
-                                <tr>
-                                    <td><h6 style="display: inline-block;">Result: <img src="/home/lubuntu/PycharmProjects/V/FYP/static/images/correct.svg" style="height: 20px;width: 20px;padding-bottom: 1px;"> </h6><br>It was detected that target website is using Content-Security-Policy header.</td>
-                                </tr>
-                                <tr>
-                                    <td><h6 style="display: inline-block;">Reference: </h6><br><a href="https://developer.mozilla.org/en-US/docs/Web/HTTP/CSP">https://developer.mozilla.org/en-US/docs/Web/HTTP/CSP</a></td>
-                                </tr>
-
-                                <tr>
-                                    <td><div><span style="visibility: hidden;display: inline-block;"><h6 style="display: inline-block;">Solution:</h6><br>Recommended directive for X-Content-Type-Options header is 'X-Content-Type-Options: nosniff'.</span></div></td>
-                                </tr>
-                                <tr>
-                                    <td><div><span style="visibility: hidden;display: inline-block;"><h6 style="display: inline-block;">Solution:</h6><br>Recommended directive for X-Content-Type-Options header is 'X-Content-Type-Options: nosniff'.</span></div></td>
-                                </tr>
-                            {% endif %}
+                            
                         </tbody>
                     </table>
                 </div>
@@ -229,7 +212,7 @@
                                 </tr>
                             </thead>
                         <tbody>
-                            {% if security_headers.hsts == "Missing" %}
+                            
                                 <tr>
                                     <td><h6  style="display: inline-block;">Description:</h6><br>HSTS ensures that website will only be accessible over HTTPS, It protects the website from ssl-striping attacks.</td>
                                 </tr>
@@ -245,24 +228,7 @@
                                 <tr>
                                     <td><h6  style="display: inline-block;">Reference: </h6><br><a href="https://developer.mozilla.org/en-US/docs/Web/HTTP/Headers/Strict-Transport-Security">https://developer.mozilla.org/en-US/docs/Web/HTTP/Headers/Strict-Transport-Security</a> </td>
                                 </tr>
-                            {% else %}
-                                <tr>
-                                    <td><h6  style="display: inline-block;">Description:</h6><br>HSTS ensures that website will only be accessible over HTTPS, It protects the website from ssl-striping attacks.</td>
-                                </tr>
-                                <tr>
-                                    <td><h6 style="display: inline-block;">Result: <img src="/home/lubuntu/PycharmProjects/V/FYP/static/images/correct.svg" style="height: 20px;width: 20px;padding-bottom: 1px;"> </h6><br>It was detected that target website is using Strict-Transport-Security header.</td>
-                                </tr>
-                                <tr>
-                                    <td><h6  style="display: inline-block;">Reference: </h6><br><a href="https://developer.mozilla.org/en-US/docs/Web/HTTP/Headers/Strict-Transport-Security">https://developer.mozilla.org/en-US/docs/Web/HTTP/Headers/Strict-Transport-Security</a> </td>
-                                </tr>
-
-                                <tr>
-                                    <td><div><span style="visibility: hidden;display: inline-block;"><h6 style="display: inline-block;">Solution:</h6><br>Recommended directive for X-Content-Type-Options header is 'X-Content-Type-Options: nosniff'.</span></div></td>
-                                </tr>
-                                <tr>
-                                    <td><div><span style="visibility: hidden;display: inline-block;"><h6 style="display: inline-block;">Solution:</h6><br>Recommended directive for X-Content-Type-Options header is 'X-Content-Type-Options: nosniff'.</span></div></td>
-                                </tr>
-                            {% endif %}
+                            
                         </tbody>
                     </table>
                 </div>
@@ -281,7 +247,7 @@
                                 </tr>
                             </thead>
                         <tbody>
-                            {% if security_headers.contenttype == "Missing" %}
+                            
                                 <tr>
                                     <td><h6  style="display: inline-block;">Description:</h6><br>X-Content-Type-Options header protect against MIME type sniffing attacks.</td>
                                 </tr>
@@ -297,24 +263,7 @@
                                 <tr>
                                     <td><h6  style="display: inline-block;">Reference: </h6><br><a href="https://developer.mozilla.org/en-US/docs/Web/HTTP/Headers/X-Content-Type-Options">https://developer.mozilla.org/en-US/docs/Web/HTTP/Headers/X-Content-Type-Options</a> </td>
                                 </tr>
-                            {% else %}
-                                <tr>
-                                    <td><h6  style="display: inline-block;">Description:</h6><br>X-Content-Type-Options header protect against MIME type sniffing attacks.</td>
-                                </tr>
-                                <tr>
-                                    <td><h6 style="display: inline-block;">Result: <img src="/home/lubuntu/PycharmProjects/V/FYP/static/images/correct.svg" style="height: 20px;width: 20px;padding-bottom: 1px;"> </h6><br>It was detected that target website is using X-Content-Type-Options header.</td>
-                                </tr>
-                                <tr>
-                                    <td><h6  style="display: inline-block;">Reference: </h6><br><a href="https://developer.mozilla.org/en-US/docs/Web/HTTP/Headers/X-Content-Type-Options">https://developer.mozilla.org/en-US/docs/Web/HTTP/Headers/X-Content-Type-Options</a> </td>
-                                </tr>
-
-                                <tr>
-                                    <td><div><span style="visibility: hidden;display: inline-block;"><h6 style="display: inline-block;">Solution:</h6><br>Recommended directive for X-Content-Type-Options header is 'X-Content-Type-Options: nosniff'.</span></div></td>
-                                </tr>
-                                <tr>
-                                    <td><div><span style="visibility: hidden;display: inline-block;"><h6 style="display: inline-block;">Solution:</h6><br>Recommended directive for X-Content-Type-Options header is 'X-Content-Type-Options: nosniff'.</span></div></td>
-                                </tr>
-                            {% endif %}
+                            
                         </tbody>
                     </table>
                 </div>
@@ -331,7 +280,7 @@
                                 </tr>
                             </thead>
                         <tbody>
-                            {% if security_headers.xframe == "Missing" %}
+                            
                                 <tr>
                                     <td><h6  style="display: inline-block;">Description:</h6><br>X-Frame-Options header protect against attacks like ClickJacking or Frame Injection. It tells browser that whether it allowed to load the website in an iframe or not.</td>
                                 </tr>
@@ -347,24 +296,7 @@
                                 <tr>
                                     <td><h6  style="display: inline-block;">Reference: </h6><br><a href="https://developer.mozilla.org/en-US/docs/Web/HTTP/Headers/X-Frame-Options">https://developer.mozilla.org/en-US/docs/Web/HTTP/Headers/X-Frame-Options</a> </td>
                                 </tr>
-                            {% else %}
-                                <tr>
-                                    <td><h6  style="display: inline-block;">Description:</h6><br>X-Frame-Options header protect against attacks like ClickJacking or Frame Injection. It tells browser that whether it allowed to load the website in an iframe or not.</td>
-                                </tr>
-                                <tr>
-                                    <td><h6 style="display: inline-block;">Result: <img src="/home/lubuntu/PycharmProjects/V/FYP/static/images/correct.svg" style="height: 20px;width: 20px;padding-bottom: 1px;"> </h6><br>It was detected that target website is using X-Frame-Options header.</td>
-                                </tr>
-                                <tr>
-                                    <td><h6  style="display: inline-block;">Reference: </h6><br><a href="https://developer.mozilla.org/en-US/docs/Web/HTTP/Headers/X-Frame-Options">https://developer.mozilla.org/en-US/docs/Web/HTTP/Headers/X-Frame-Options</a> </td>
-                                </tr>
-
-                                <tr>
-                                    <td><div><span style="visibility: hidden;display: inline-block;"><h6 style="display: inline-block;">Solution:</h6><br>Recommended directive for X-Content-Type-Options header is 'X-Content-Type-Options: nosniff'.</span></div></td>
-                                </tr>
-                                <tr>
-                                    <td><div><span style="visibility: hidden;display: inline-block;"><h6 style="display: inline-block;">Solution:</h6><br>Recommended directive for X-Content-Type-Options header is 'X-Content-Type-Options: nosniff'.</span></div></td>
-                                </tr>
-                            {% endif %}
+                            
                         </tbody>
                     </table>
                 </div>
@@ -383,7 +315,7 @@
                                 </tr>
                             </thead>
                         <tbody>
-                            {% if security_headers.xssprotection == "Missing" %}
+                            
                                 <tr>
                                     <td><h6  style="display: inline-block;">Description:</h6><br>X-XSS-Protection header protect against Cross-site Scripting (XSS) attacks. It enable XSS-filtering in the browser and block page from rendering if it contain any malicious javascript.</td>
                                 </tr>
@@ -399,24 +331,7 @@
                                 <tr>
                                     <td><h6  style="display: inline-block;">Reference: </h6><br><a href="https://developer.mozilla.org/en-US/docs/Web/HTTP/Headers/X-XSS-Protection">https://developer.mozilla.org/en-US/docs/Web/HTTP/Headers/X-XSS-Protection</a> </td>
                                 </tr>
-                            {% else %}
-                                <tr>
-                                    <td><h6  style="display: inline-block;">Description:</h6><br>X-XSS-Protection header protect against Cross-site Scripting (XSS) attacks. It enable XSS-filtering in the browser and block page from rendering if it contain any malicious javascript.</td>
-                                </tr>
-                                <tr>
-                                    <td><h6 style="display: inline-block;">Result: <img src="/home/lubuntu/PycharmProjects/V/FYP/static/images/correct.svg" style="height: 20px;width: 20px;padding-bottom: 1px;"> </h6><br>It was detected that target website is using X-XSS-Protection header.</td>
-                                </tr>
-                                <tr>
-                                    <td><h6  style="display: inline-block;">Reference: </h6><br><a href="https://developer.mozilla.org/en-US/docs/Web/HTTP/Headers/X-XSS-Protection">https://developer.mozilla.org/en-US/docs/Web/HTTP/Headers/X-XSS-Protection</a> </td>
-                                </tr>
-
-                                <tr>
-                                    <td><div><span style="visibility: hidden;display: inline-block;"><h6 style="display: inline-block;">Solution:</h6><br>Recommended directive for X-Content-Type-Options header is 'X-Content-Type-Options: nosniff'.</span></div></td>
-                                </tr>
-                                <tr>
-                                    <td><div><span style="visibility: hidden;display: inline-block;"><h6 style="display: inline-block;">Solution:</h6><br>Recommended directive for X-Content-Type-Options header is 'X-Content-Type-Options: nosniff'.</span></div></td>
-                                </tr>
-                            {% endif %}
+                            
                         </tbody>
                     </table>
                 </div>
@@ -428,7 +343,7 @@
         <div class="container">
             <div class="mt-5 mb-4 pt-1">
                 <h2 style="margin-bottom: 15px;">Results For Target</h2>
-                <img src="/home/lubuntu/PycharmProjects/V/FYP/static/images/arrow.svg" style="height: 25px;width: 25px;display: inline;padding-bottom: 5px;"><h5 style="display: inline;color:darkblue;">&nbsp;{{ target_ip }}&nbsp;</h5><img src="/home/lubuntu/PycharmProjects/V/FYP/static/images/arrow.svg" style="height: 25px;width: 25px;display: inline;padding-bottom: 5px;"><h5 style="display: inline;">&nbsp;Vulnerabilities</h5>
+                <img src="/home/lubuntu/PycharmProjects/V/FYP/static/images/arrow.svg" style="height: 25px;width: 25px;display: inline;padding-bottom: 5px;"><h5 style="display: inline;color:darkblue;">&nbsp;59.103.250.60&nbsp;</h5><img src="/home/lubuntu/PycharmProjects/V/FYP/static/images/arrow.svg" style="height: 25px;width: 25px;display: inline;padding-bottom: 5px;"><h5 style="display: inline;">&nbsp;Vulnerabilities</h5>
                 <hr style="color:orange; height: 3px;margin-bottom: 20px;">
             </div>
         </div>
@@ -443,7 +358,7 @@
                                 </tr>
                             </thead>
                         <tbody>
-                            {% if xss.status == True %}
+                            
                                 <tr>
                                     <td><h6  style="display: inline-block;">Description:</h6><br>Cross-site scripting is a vulnerability that comes under the category of injections, it
                                         allows an attacker to compromise the interactions of the user with the vulnerable
@@ -468,27 +383,7 @@
                                 <tr>
                                     <td><h6  style="display: inline-block;">Reference: </h6><br><a href="https://www.acunetix.com/websitesecurity/cross-site-scripting/">https://www.acunetix.com/websitesecurity/cross-site-scripting/</a></td>
                                 </tr>
-                            {% else %}
-                                <tr>
-                                    <td><h6  style="display: inline-block;">Description:</h6><br>Cross-site scripting is a vulnerability that comes under the category of injections, it
-                                        allows an attacker to compromise the interactions of the user with the vulnerable
-                                        application. XSS ranked among one of the top 10 security risks by Owasp. <a href="https://owasp.org/Top10/">OWASP Top 10:2021</a>
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <td><h6 style="display: inline-block;">Result: <img src="/home/lubuntu/PycharmProjects/V/FYP/static/images/correct.svg" style="height: 20px;width: 20px;padding-bottom: 1px;"> </h6><br>It was detected that target website is not vulnerable to XSS.</td>
-                                </tr>
-                                <tr>
-                                    <td><h6  style="display: inline-block;">Reference: </h6><br><a href="https://www.acunetix.com/websitesecurity/cross-site-scripting/">https://www.acunetix.com/websitesecurity/cross-site-scripting/</a></td>
-                                </tr>
-
-                                <tr>
-                                    <td><div><span style="visibility: hidden;display: inline-block;"><h6 style="display: inline-block;">Solution:</h6><br>Recommended directive for X-Content-Type-Options header is 'X-Content-Type-Options: nosniff'.</span></div></td>
-                                </tr>
-                                <tr>
-                                    <td><div><span style="visibility: hidden;display: inline-block;"><h6 style="display: inline-block;">Solution:</h6><br>Recommended directive for X-Content-Type-Options header is 'X-Content-Type-Options: nosniff'.</span></div></td>
-                                </tr>
-                            {% endif %}
+                            
                         </tbody>
                     </table>
                 </div>
@@ -496,7 +391,7 @@
             </div>
         </div>
 
-        {% if xss.status %}
+        
             <div class="container">
                 <div class="container">
                     <div class="row">
@@ -527,9 +422,7 @@
                     </div>
                 </div>
             </div>
-        {% else %}
-        <!-- pass -->
-        {% endif %}
+        
         <p id="page_break"></p>
 
         <div class="container">
@@ -542,7 +435,7 @@
                                 </tr>
                             </thead>
                         <tbody>
-                            {% if sqli.status == True %}
+                            
                                 <tr>
                                     <td><h6  style="display: inline-block;">Description:</h6><br>SQL injection is one of the most notorious vulnerabilities still found in web
                                         applications, although it’s a very old vulnerability still it is included in the top 10 most
@@ -567,27 +460,7 @@
                                 <tr>
                                     <td><h6  style="display: inline-block;">Reference: </h6><br><a href="https://www.acunetix.com/websitesecurity/sql-injection/">https://www.acunetix.com/websitesecurity/sql-injection/</a></td>
                                 </tr>
-                            {% else %}
-                                <tr>
-                                    <td><h6  style="display: inline-block;">Description:</h6><br>SQL injection is one of the most notorious vulnerabilities still found in web
-                                        applications, although it’s a very old vulnerability still it is included in the top 10 most
-                                        common web application vulnerabilities. SQLi ranked among one of the top 10 security risks by Owasp. <a href="https://owasp.org/Top10/">OWASP Top 10:2021</a>
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <td><h6 style="display: inline-block;">Result: <img src="/home/lubuntu/PycharmProjects/V/FYP/static/images/correct.svg" style="height: 20px;width: 20px;padding-bottom: 1px;"> </h6><br>It was detected that target website is not vulnerable to SQL Injection.</td>
-                                </tr>
-                                <tr>
-                                    <td><h6  style="display: inline-block;">Reference: </h6><br><a href="https://www.acunetix.com/websitesecurity/sql-injection/">https://www.acunetix.com/websitesecurity/sql-injection/</a></td>
-                                </tr>
-
-                                <tr>
-                                    <td><div><span style="visibility: hidden;display: inline-block;"><h6 style="display: inline-block;">Solution:</h6><br>Recommended directive for X-Content-Type-Options header is 'X-Content-Type-Options: nosniff'.</span></div></td>
-                                </tr>
-                                <tr>
-                                    <td><div><span style="visibility: hidden;display: inline-block;"><h6 style="display: inline-block;">Solution:</h6><br>Recommended directive for X-Content-Type-Options header is 'X-Content-Type-Options: nosniff'.</span></div></td>
-                                </tr>
-                            {% endif %}
+                            
                         </tbody>
                     </table>
                 </div>
@@ -595,7 +468,7 @@
             </div>
         </div>
 
-        {% if sqli.status %}
+        
             <div class="container">
                 <div class="container">
                     <div class="row">
@@ -615,16 +488,7 @@
                                 <h6 style="padding-top: 0px;">Exploitability</h6>
                             </div>
                         </div>
-                        {% if sqli.sure %}
-                            <div class="col-4 text-center">
-                                <div class="border border-2 rounded-5" style="width: 230px;height: 12rem;background-color: #7a7676;color: white;">
-                                    <h1 style="font-size: 3rem;font-weight: bold;padding-top: 45px;">
-                                        100% <br>
-                                    </h1>
-                                    <h6 style="padding-top: 0px;">Confidence</h6>
-                                </div>
-                            </div>
-                        {% else %}
+                        
                             <div class="col-4 text-center">
                                 <div class="border border-2 rounded-5" style="width: 230px;height: 12rem;background-color: #7a7676;color: white;">
                                     <h1 style="font-size: 3rem;font-weight: bold;padding-top: 45px;">
@@ -633,13 +497,11 @@
                                     <h6 style="padding-top: 0px;">Confidence</h6>
                                 </div>
                             </div>
-                        {% endif %}
+                        
                     </div>
                 </div>
             </div>
-        {% else %}
-        <!-- pass -->
-        {% endif %}
+        
         <p id="page_break"></p>
 
         <div class="container">
@@ -652,30 +514,7 @@
                                 </tr>
                             </thead>
                         <tbody>
-                            {% if csrf.status == True %}
-                                <tr>
-                                    <td><h6  style="display: inline-block;">Description:</h6><br>This vulnerability forces users of the vulnerable application to perform unintended
-                                        actions without their consent, it bypasses the same-origin policy which avoid different
-                                        websites to interfere with each other. CSRF ranked among one of the top 10 security risks by Owasp. <a href="https://owasp.org/Top10/">OWASP Top 10:2021</a>
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <td><h6 style="display: inline-block;">Result: <img src="/home/lubuntu/PycharmProjects/V/FYP/static/images/missing.svg" style="height: 20px;width: 20px;padding-bottom: 1px;"> </h6><br>It was detected that target website is vulnerable to Cross-site Request Forgery (CSRF).</td>
-                                </tr>
-                                <tr>
-                                    <td><h6 style="display: inline-block;">Impact:</h6><br> By exploiting CSRF an attacker can perform
-                                        actions like changing email, and password or making funds transfer by sending
-                                        malicious requests to the application by the authenticated user without knowing about
-                                        it.
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <td><h6 style="display: inline-block;">Solution:</h6><br>Use anti-csrf tokens to mitigate the CSRF attacks. For securing cookies from CSRF, use Samesite directive in the Set-Cookie response header. For further detail check it out <a href="https://cheatsheetseries.owasp.org/cheatsheets/Cross-Site_Request_Forgery_Prevention_Cheat_Sheet.html">CSRF Prevention</a>.</td>
-                                </tr>
-                                <tr>
-                                    <td><h6  style="display: inline-block;">Reference: </h6><br><a href="https://owasp.org/www-community/attacks/csrf">https://owasp.org/www-community/attacks/csrf</a></td>
-                                </tr>
-                            {% else %}
+                            
                                 <tr>
                                     <td><h6  style="display: inline-block;">Description:</h6><br>This vulnerability forces users of the vulnerable application to perform unintended
                                         actions without their consent, it bypasses the same-origin policy which avoid different
@@ -695,7 +534,7 @@
                                 <tr>
                                     <td><div><span style="visibility: hidden;display: inline-block;"><h6 style="display: inline-block;">Solution:</h6><br>Recommended directive for X-Content-Type-Options header is 'X-Content-Type-Options: nosniff'.</span></div></td>
                                 </tr>
-                            {% endif %}
+                            
                         </tbody>
                     </table>
                 </div>
@@ -703,40 +542,9 @@
             </div>
         </div>
 
-        {% if csrf.status %}
-            <div class="container">
-                <div class="container">
-                    <div class="row">
-                        <div class="col-4 text-center">
-                            <div class="border border-2 rounded-5" style="width: 230px;height: 12rem;background-color: #4682B4;color: white;">
-                                <h1 style="font-size: 3rem;font-weight: bold;padding-top: 45px;">
-                                    Medium <br>
-                                </h1>
-                                <h6 style="padding-top: 0px;">Severity</h6>
-                            </div>
-                        </div>
-                        <div class="col-4 text-center">
-                            <div class="border border-2 rounded-5" style="width: 230px;height: 12rem;background-color: #7a7676;color: white;">
-                                <h1 style="font-size: 3rem;font-weight: bold;padding-top: 45px;">
-                                    Hard <br>
-                                </h1>
-                                <h6 style="padding-top: 0px;">Exploitability</h6>
-                            </div>
-                        </div>
-                        <div class="col-4 text-center">
-                            <div class="border border-2 rounded-5" style="width: 230px;height: 12rem;background-color: #7a7676;color: white;">
-                                <h1 style="font-size: 3rem;font-weight: bold;padding-top: 45px;">
-                                    95% <br>
-                                </h1>
-                                <h6 style="padding-top: 0px;">Confidence</h6>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        {% else %}
+        
         <!-- pass -->
-        {% endif %}
+        
         <p id="page_break"></p>
 
         <div class="container">
@@ -749,7 +557,7 @@
                                 </tr>
                             </thead>
                         <tbody>
-                            {% if cj.status == True %}
+                            
                                 <tr>
                                     <td><h6  style="display: inline-block;">Description:</h6><br>Clickjacking is an attack that fools users into thinking they are clicking on one thing when they are actually clicking on another.
                                         Users think they are using a web page’s normal UI, but in fact there is a hidden UI in control; in other words, the UI has been redressed. When users click something they think is safe, the hidden UI performs a different action.
@@ -771,26 +579,7 @@
                                 <tr>
                                     <td><h6  style="display: inline-block;">Reference: </h6><br><a href="https://owasp.org/www-community/attacks/Clickjacking">https://owasp.org/www-community/attacks/Clickjacking</a></td>
                                 </tr>
-                            {% else %}
-                                <tr>
-                                    <td><h6  style="display: inline-block;">Description:</h6><br>Clickjacking is an attack that fools users into thinking they are clicking on one thing when they are actually clicking on another.
-                                        Users think they are using a web page’s normal UI, but in fact there is a hidden UI in control; in other words, the UI has been redressed. When users click something they think is safe, the hidden UI performs a different action.
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <td><h6 style="display: inline-block;">Result: <img src="/home/lubuntu/PycharmProjects/V/FYP/static/images/correct.svg" style="height: 20px;width: 20px;padding-bottom: 1px;"> </h6><br>It was detected that target website is not vulnerable to ClickJacking.</td>
-                                </tr>
-                                <tr>
-                                    <td><h6  style="display: inline-block;">Reference: </h6><br><a href="https://owasp.org/www-community/attacks/Clickjacking">https://owasp.org/www-community/attacks/Clickjacking</a></td>
-                                </tr>
-
-                                <tr>
-                                    <td><div><span style="visibility: hidden;display: inline-block;"><h6 style="display: inline-block;">Solution:</h6><br>Recommended directive for X-Content-Type-Options header is 'X-Content-Type-Options: nosniff'.</span></div></td>
-                                </tr>
-                                <tr>
-                                    <td><div><span style="visibility: hidden;display: inline-block;"><h6 style="display: inline-block;">Solution:</h6><br>Recommended directive for X-Content-Type-Options header is 'X-Content-Type-Options: nosniff'.</span></div></td>
-                                </tr>
-                            {% endif %}
+                            
                         </tbody>
                     </table>
                 </div>
@@ -798,7 +587,7 @@
             </div>
         </div>
 
-        {% if cj.status %}
+        
             <div class="container">
                 <div class="container">
                     <div class="row">
@@ -829,15 +618,13 @@
                     </div>
                 </div>
             </div>
-        {% else %}
-        <!-- pass -->
-        {% endif %}
+        
         <p id="page_break"></p>
 
         <div class="container">
             <div class="mt-5 mb-4 pt-1">
                 <h2 style="margin-bottom: 15px;">Results For Target</h2>
-                <img src="/home/lubuntu/PycharmProjects/V/FYP/static/images/arrow.svg" style="height: 25px;width: 25px;display: inline;padding-bottom: 5px;"><h5 style="display: inline;color:darkblue;">&nbsp;{{ target_ip }}&nbsp;</h5><img src="/home/lubuntu/PycharmProjects/V/FYP/static/images/arrow.svg" style="height: 25px;width: 25px;display: inline;padding-bottom: 5px;"><h5 style="display: inline;">&nbsp;Footprinting</h5>
+                <img src="/home/lubuntu/PycharmProjects/V/FYP/static/images/arrow.svg" style="height: 25px;width: 25px;display: inline;padding-bottom: 5px;"><h5 style="display: inline;color:darkblue;">&nbsp;59.103.250.60&nbsp;</h5><img src="/home/lubuntu/PycharmProjects/V/FYP/static/images/arrow.svg" style="height: 25px;width: 25px;display: inline;padding-bottom: 5px;"><h5 style="display: inline;">&nbsp;Footprinting</h5>
                 <hr style="color:orange; height: 3px;margin-bottom: 20px;">
             </div>
         </div>
@@ -855,18 +642,25 @@
                             </tr>
                         </thead>
                         <tbody>
-                            {% for key,val in ports["port-scanner"].items() %}
-                                {% if key == "os" %}
-                                    <!-- pass -->
-                                {% else %}
+                            
+                                
                                     <tr>
-                                        <th scope="row">{{ key }}</th>
+                                        <th scope="row">80</th>
                                         <td> <p class="d-inline rounded-3 p-1" style="font-weight: bold;background-color: green;color: white;">Open</p></th>
-                                        <td>{{ val["service"].upper() }}</th>
-                                        <td>{{ val["banner"] }}</th>
+                                        <td>HTTP</th>
+                                        <td>None</th>
                                     </tr>
-                                {% endif %}
-                            {% endfor %}
+                                
+                            
+                                
+                                    <tr>
+                                        <th scope="row">3389</th>
+                                        <td> <p class="d-inline rounded-3 p-1" style="font-weight: bold;background-color: green;color: white;">Open</p></th>
+                                        <td>MS-WBT-SERVER</th>
+                                        <td>None</th>
+                                    </tr>
+                                
+                            
                             <tr>
                                 <td colspan="4"><span style="font-weight: bold;color:#4682B4">Recommendation:<br><p style="font-weight: normal;color:black;">Keep unnecessary ports close because open ports are like open doors for the attacker. An attacker can launch various attacks against services running on these open ports. For best practices set custom banner to the service running on each port so that attacker cant get an idea about the running service and its version. <a href="https://www.acunetix.com/blog/articles/danger-open-ports-trojan-trojan/">More</a> </p></span></td>
                             </tr>
@@ -882,7 +676,7 @@
         <div class="container">
             <div class="mt-5 mb-4 pt-1">
                 <h2 style="margin-bottom: 15px;">Results For Target</h2>
-                <img src="/home/lubuntu/PycharmProjects/V/FYP/static/images/arrow.svg" style="height: 25px;width: 25px;display: inline;padding-bottom: 5px;"><h5 style="display: inline;color:darkblue;">&nbsp;{{ target_ip }}&nbsp;</h5><img src="/home/lubuntu/PycharmProjects/V/FYP/static/images/arrow.svg" style="height: 25px;width: 25px;display: inline;padding-bottom: 5px;"><h5 style="display: inline;">&nbsp;Warnings</h5>
+                <img src="/home/lubuntu/PycharmProjects/V/FYP/static/images/arrow.svg" style="height: 25px;width: 25px;display: inline;padding-bottom: 5px;"><h5 style="display: inline;color:darkblue;">&nbsp;59.103.250.60&nbsp;</h5><img src="/home/lubuntu/PycharmProjects/V/FYP/static/images/arrow.svg" style="height: 25px;width: 25px;display: inline;padding-bottom: 5px;"><h5 style="display: inline;">&nbsp;Warnings</h5>
                 <hr style="color:orange; height: 3px;margin-bottom: 20px;">
             </div>
         </div>
@@ -899,37 +693,71 @@
                             </tr>
                         </thead>
                         <tbody>
-                            {% for key,val in warningss.items() %}
-                                {% if val %}
-                                    {% if key == "Cookies" and val.cookies %}
+                            
+                                
+                                    
                                         <tr>
-                                            <th scope="row">{{ key }}</th>
-                                            <td><img src="/home/lubuntu/PycharmProjects/V/FYP/static/images/missing.svg" style="height: 20px;width: 20px;padding-bottom: 1px;">  {{ val }}</td>
-                                            <td>Incorrect directives! <br> {% for k,v in val.items() %} {% if v == False %} {{k}} flag must be set in cookies. {% endif %} {% endfor %}</td>
-                                        </tr>
-                                    {% elif key == "Protocol" %}
-                                        <tr>
-                                            <th scope="row">{{ key }}</th>
-                                            <td><img src="/home/lubuntu/PycharmProjects/V/FYP/static/images/missing.svg" style="height: 20px;width: 20px;padding-bottom: 1px;">  {{ val }}</td>
+                                            <th scope="row">Protocol</th>
+                                            <td><img src="/home/lubuntu/PycharmProjects/V/FYP/static/images/missing.svg" style="height: 20px;width: 20px;padding-bottom: 1px;">  HTTP</td>
                                             <td>Target is running over HTTP which is vulnerable to Man-in-the-middle attacks (MITM).</td>
                                         </tr>
-                                    {% elif key == "Jquery"%}
-                                        {% if val.status == "outdated" %}
-                                            <tr>
-                                                <th scope="row">{{ key }}</th>
-                                                <td><img src="/home/lubuntu/PycharmProjects/V/FYP/static/images/missing.svg" style="height: 20px;width: 20px;padding-bottom: 1px;">  {{ val.version }}</td>
-                                                <td>Outdated version detected</td>
-                                            </tr>
-                                        {% endif %}
-                                    {% else %}
+                                    
+                                
+                            
+                                
+                            
+                                
+                                    
                                         <tr>
-                                            <th scope="row">{{ key }}</th>
-                                            <td><img src="/home/lubuntu/PycharmProjects/V/FYP/static/images/missing.svg" style="height: 20px;width: 20px;padding-bottom: 1px;">  {{ val }}</td>
+                                            <th scope="row">Server</th>
+                                            <td><img src="/home/lubuntu/PycharmProjects/V/FYP/static/images/missing.svg" style="height: 20px;width: 20px;padding-bottom: 1px;">  Microsoft-IIS/8.5</td>
                                             <td>Senstive information is being leaked</td>
                                         </tr>
-                                    {% endif %}
-                                {% endif %}
-                            {% endfor %}
+                                    
+                                
+                            
+                                
+                                    
+                                        <tr>
+                                            <th scope="row">Technology</th>
+                                            <td><img src="/home/lubuntu/PycharmProjects/V/FYP/static/images/missing.svg" style="height: 20px;width: 20px;padding-bottom: 1px;">  ASP.NET 4.0.30319</td>
+                                            <td>Senstive information is being leaked</td>
+                                        </tr>
+                                    
+                                
+                            
+                                
+                                    
+                                        
+                                            <tr>
+                                                <th scope="row">Jquery</th>
+                                                <td><img src="/home/lubuntu/PycharmProjects/V/FYP/static/images/missing.svg" style="height: 20px;width: 20px;padding-bottom: 1px;">  1.9.1</td>
+                                                <td>Outdated version detected</td>
+                                            </tr>
+                                        
+                                    
+                                
+                            
+                                
+                                    
+                                        <tr>
+                                            <th scope="row">OS</th>
+                                            <td><img src="/home/lubuntu/PycharmProjects/V/FYP/static/images/missing.svg" style="height: 20px;width: 20px;padding-bottom: 1px;">  Unknown</td>
+                                            <td>Senstive information is being leaked</td>
+                                        </tr>
+                                    
+                                
+                            
+                                
+                                    
+                                        <tr>
+                                            <th scope="row">Cookies</th>
+                                            <td><img src="/home/lubuntu/PycharmProjects/V/FYP/static/images/missing.svg" style="height: 20px;width: 20px;padding-bottom: 1px;">  {'cookies': True, 'Secure': False, 'HttpOnly': True, 'SameSite': True}</td>
+                                            <td>Incorrect directives! <br>     Secure flag must be set in cookies.      </td>
+                                        </tr>
+                                    
+                                
+                            
                             <tr>
                                 <td colspan="4"><span style="font-weight: bold;color:#4682B4">Recommendation:<br><p style="font-weight: normal;color:black;">
                                         Above information help an attacker to build an effective attack against the target.

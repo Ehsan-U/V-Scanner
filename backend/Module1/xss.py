@@ -46,20 +46,24 @@ class Xss():
     def decide_limits(self,urls,forms_d,depth):
         if depth:
             if urls != None and len(urls) > 0:
-                urls = urls[:500]
+                #urls = urls[:500]
                 return urls
             elif forms_d != None and len(forms_d.get("forms")) > 0:
-                links = forms_d.get("links")[:250]
-                forms = forms_d.get("forms")[:250]
+                # links = forms_d.get("links")[:250]
+                links = forms_d.get("links")
+                # forms = forms_d.get("forms")[:250]
+                forms = forms_d.get("forms")
                 # self.r.print("forms leng",len(forms))
                 return {"forms":forms,'links':links}
         else:
             if urls != None and len(urls) > 0:
-                urls = urls[:250]
+                #urls = urls[:250]
                 return urls
             elif forms_d != None and len(forms_d.get("forms")) > 0:
-                links = forms_d.get("links")[:150]
-                forms = forms_d.get("forms")[:150]
+                # links = forms_d.get("links")[:150]
+                # forms = forms_d.get("forms")[:150]
+                links = forms_d.get("links")
+                forms = forms_d.get("forms")
                 return {"forms":forms,'links':links}
 
     def start_xss(self,session,item,flag,lock):

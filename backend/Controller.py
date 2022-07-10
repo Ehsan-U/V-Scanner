@@ -95,8 +95,11 @@ class Controller():
             ports_copy = copy.deepcopy(ports)
             jquery_copy = copy.deepcopy(self.jquery_data)
             end = time.perf_counter()-float(start_counter)
+            try:
 
-            self.to_pdf(url,vulners,headers,start_time,end,ports_copy,jquery_copy,crawled_links)
+                self.to_pdf(url,vulners,headers,start_time,end,ports_copy,jquery_copy,crawled_links)
+            except Exception as e:
+                print(e)
             print("Finishing")
             # logger.info("Finishing")
             return vulnerabilities,headers_info,ports,self.jquery_data
@@ -162,7 +165,7 @@ class Controller():
         cookies = headers['Cookies']
         head_copy = copy.deepcopy(headers)
         ports_copy = copy.deepcopy(ports)
-        chaart = self.gen_chart(vulners,head_copy,ports_copy,copy.deepcopy(jquery))
+        chaart = self.gen_chart(target,vulners,head_copy,ports_copy,copy.deepcopy(jquery))
         # dynamic data
         grade = self.find_score(security_headers,cookies,target,[xss,sqli])
         severity = self.cal_severity(grade)
@@ -201,7 +204,7 @@ class Controller():
         # cookies already there above
         template_loader = jinja2.FileSystemLoader("/")
         template_Env = jinja2.Environment(loader=template_loader)
-        template_file = "/home/ubuntu/backend/Misc/report.html"
+        template_file = "/home/lubuntu/PycharmProjects/V/backend/Misc/report.html"
         template = template_Env.get_template(template_file)
         output = template.render(
             host = target,
@@ -218,11 +221,12 @@ class Controller():
             csrf = csrf,
             cj = cj,
             ports = ports,
-            warningss = warningss
+            warningss = warningss,
+            chart = urlparse(target).netloc
         )
         # delete already present files
-        filehtml = "/home/ubuntu/backend/report.html"
-        filepdf = "/home/ubuntu/backend/report.pdf"
+        filehtml = f"/home/lubuntu/PycharmProjects/V/backend/reports/{urlparse(target).netloc}.html"
+        filepdf = f"/home/lubuntu/PycharmProjects/V/backend/reports/{urlparse(target).netloc}.pdf"
         if os.path.exists(filehtml) and os.path.exists(filepdf):
             os.remove(filehtml)
             os.remove(filepdf)
@@ -231,14 +235,14 @@ class Controller():
         else:
             print("Files not present")
             # logger.info("[+] File not present")
-        html_path = f'/home/ubuntu/backend/report.html'
+        html_path = f'/home/lubuntu/PycharmProjects/V/backend/reports/{urlparse(target).netloc}.html'
         html_file = open(html_path, 'w')
         html_file.write(output)
         html_file.close()
         # issue of report
-        HTML('/home/ubuntu/backend/report.html').write_pdf('/home/ubuntu/backend/report.pdf', stylesheets=['/home/ubuntu/FYP/static/css/report.css'])
+        HTML(html_path).write_pdf(f'/home/lubuntu/PycharmProjects/V/backend/reports/{urlparse(target).netloc}.pdf', stylesheets=['/home/lubuntu/PycharmProjects/V/FYP/static/css/report.css'])
         # save vulnerable inputs
-        self.save_inputs(xss,sqli,csrf)
+        self.save_inputs(target,xss,sqli,csrf)
 
     def get_date(self,):
         date = datetime.now()
@@ -365,17 +369,17 @@ class Controller():
         dt = datetime.now(timezone)
         return dt.strftime("%Y:%m:%d %H:%M:%S")
 
-    def save_inputs(self,xss,sqli,csrf):
+    def save_inputs(self,target,xss,sqli,csrf):
         v_inputs = {
             "xss":{"vulnerable parameters":[xss['p-links']],"vulnerable_forms":xss['f-links']},
             "sqli":{"vulnerable parameters":[sqli['p-links']],"vulnerable_forms":sqli['f-links']},
             "csrf":{"vulnerable_forms":[csrf['f-links']]}
         }
-        with open("/home/ubuntu/backend/vulnerable_inputs.json",'w') as f:
+        with open(f"/home/lubuntu/PycharmProjects/V/backend/v_inputs/{urlparse(target).netloc}.json",'w') as f:
             json.dump(v_inputs,f)
 
     ##### Generate Chart #####
-    def gen_chart(self,vulners,headers,ports,jquery):
+    def gen_chart(self,target,vulners,headers,ports,jquery):
         matplotlib.use('Agg')
         xss = vulners.get('XSS')
         sqli = vulners.get('SQLi')
@@ -409,7 +413,7 @@ class Controller():
         ax1.pie(sizes,labels=labels,colors=colors,autopct='%1.1f%%',shadow=True,startangle=90)
         ax1.axis("equal")
         plt.legend()
-        plt.savefig("/home/ubuntu/FYP/chart.png",bbox_inches='tight')
+        plt.savefig(f"/home/lubuntu/PycharmProjects/V/FYP/charts/{urlparse(target).netloc}.png",bbox_inches='tight')
         plt.close(fig1)
 
     def find_ratings(self,vulners,security_headers,risky_ports,csrf,cj,ports,Technologies):
@@ -468,6 +472,7 @@ def result(item:Item):
         print(e)
         results = [{"cause":'timeout'}]
     finally:
+        print(results)
         return results
 
 if __name__=='__main__':

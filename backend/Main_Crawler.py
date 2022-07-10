@@ -162,9 +162,9 @@ class FYP_Crawler():
                 lock.acquire(2)
                 depth = self.depth
                 if depth:
-                    to_crawl = 2000
+                    to_crawl = 5000
                 else:
-                    to_crawl = 1000
+                    to_crawl = 500
                 allowed = self.allowed
                 urls = self.urls.get("urls")
                 target = self.target
@@ -214,9 +214,9 @@ class FYP_Crawler():
                     lock.acquire(2)
                     depth = self.depth
                     if depth:
-                        to_crawl = 2000
+                        to_crawl = 5000
                     else:
-                        to_crawl = 1000
+                        to_crawl = 500
                     allowed = self.allowed
                     urls = self.urls.get('urls')
                     target = self.target
@@ -332,7 +332,7 @@ class FYP_Crawler():
         if not self.queue.empty():
             if not self.depth and len(self.urls) <= 500:
                 self.run(lock)
-            elif self.depth and len(self.urls) <=2000:
+            elif self.depth and len(self.urls) <=5000:
                 self.run(lock)
         # r.save_html("/home/lubuntu/FYP/logs/crawler_logs.html")
 

@@ -29,7 +29,7 @@ def result(request):
     if request.method.lower() == 'post':
         req_url = request.POST.get("search").strip().encode('utf-8')
         filename = hashlib.md5(req_url).hexdigest()
-        datafile = f'/home/ubuntu/FYP/result_data/{filename}.json'
+        datafile = f'/home/lubuntu/PycharmProjects/V/FYP/result_data/{filename}.json'
         data = get_data(request)
         if os.path.exists(datafile):
             os.remove(datafile)
@@ -39,7 +39,7 @@ def result(request):
     elif request.method.lower() == 'get':
         req_url = request.GET.get("target",'None').encode('utf-8')
         filename = hashlib.md5(req_url).hexdigest()
-        datafile = f'/home/ubuntu/FYP/result_data/{filename}.json'
+        datafile = f'/home/lubuntu/PycharmProjects/V/FYP/result_data/{filename}.json'
         if os.path.exists(datafile):
             with open(datafile,'r') as f:
                 data = json.load(f)
@@ -275,22 +275,32 @@ def find_score(sec_headers,cookies,target,vulners):
         return grade
 
 def fetch_pdf(request):
-    if request.headers.get("Host") == 'vscanner.me':
-        pdf = "/home/ubuntu/backend/report.pdf"
-        return FileResponse(open(pdf,"rb"),as_attachment=True,content_type="application/json")
+    if request.method.lower() == 'post':
+        if request.headers.get("Host") == '127.0.0.1:8000':
+            target = request.POST.get("report").strip()
+            pdf = f"/home/lubuntu/PycharmProjects/V/backend/reports/{urlparse(target).netloc}.pdf"
+            return FileResponse(open(pdf,"rb"),as_attachment=True,filename=f"{urlparse(target).netloc}.pdf",content_type="application/pdf")
+        else:
+            context = {"code":[4,0,4],"error":"Not Found"}
+            return render(request,"404.html",context)
     else:
         context = {"code":[4,0,4],"error":"Not Found"}
         return render(request,"404.html",context)
-
+    
 def v_inputs(request):
-    if request.headers.get("Host") == 'vscanner.me':
-        vulner_inputs = "/home/ubuntu/backend/vulnerable_inputs.json"
-        opened = open(vulner_inputs,'r')
-        content_type = 'application/json'
-        response = HttpResponse(opened,content_type=content_type)
-        response['Content-Disposition'] = f"attachment; filename=vulnerable_inputs.json"
-        opened.close()
-        return response
+    if request.method.lower() == 'post':
+        if request.headers.get("Host") == '127.0.0.1:8000':
+            target = request.POST.get("v_inputs").strip()
+            vulner_inputs = f"/home/lubuntu/PycharmProjects/V/backend/v_inputs/{urlparse(target).netloc}.json"
+            opened = open(vulner_inputs,'r')
+            content_type = 'application/json'
+            response = HttpResponse(opened,content_type=content_type)
+            response['Content-Disposition'] = f"attachment; filename={urlparse(target).netloc}.json"
+            opened.close()
+            return response
+        else:
+            context = {"code":[4,0,4],"error":"Not Found"}
+            return render(request,"404.html",context)
     else:
         context = {"code":[4,0,4],"error":"Not Found"}
         return render(request,"404.html",context)

@@ -197,7 +197,7 @@ class Header_Manipulation():
                 self.headers_info["Technology"][0] = True
                 self.headers_info["Technology"].append("Wordpress")
                 self.headers_info["Technology"].append("The server is leaking the senstive information about technology")
-        outputt = subprocess.check_output(['python3', 'builtw.py', '-u', f'{self.url}', '-a', f'{self.user_agent}'],shell=False)
+        outputt = subprocess.check_output(['python3', '/home/lubuntu/PycharmProjects/V/backend/Module2/builtw.py', '-u', f'{self.url}', '-a', f'{self.user_agent}'],shell=False)
         site_data = ast.literal_eval(outputt.decode("utf-8"))
         if bool(site_data):
             print('FLAG TRUE')
