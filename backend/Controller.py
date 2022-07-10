@@ -204,7 +204,7 @@ class Controller():
         # cookies already there above
         template_loader = jinja2.FileSystemLoader("/")
         template_Env = jinja2.Environment(loader=template_loader)
-        template_file = "/home/lubuntu/PycharmProjects/V/backend/Misc/report.html"
+        template_file = "/home/ubuntu/backend/Misc/report.html"
         template = template_Env.get_template(template_file)
         output = template.render(
             host = target,
@@ -225,8 +225,8 @@ class Controller():
             chart = urlparse(target).netloc
         )
         # delete already present files
-        filehtml = f"/home/lubuntu/PycharmProjects/V/backend/reports/{urlparse(target).netloc}.html"
-        filepdf = f"/home/lubuntu/PycharmProjects/V/backend/reports/{urlparse(target).netloc}.pdf"
+        filehtml = f"/home/ubuntu/backend/reports/{urlparse(target).netloc}.html"
+        filepdf = f"/home/ubuntu/backend/reports/{urlparse(target).netloc}.pdf"
         if os.path.exists(filehtml) and os.path.exists(filepdf):
             os.remove(filehtml)
             os.remove(filepdf)
@@ -235,12 +235,12 @@ class Controller():
         else:
             print("Files not present")
             # logger.info("[+] File not present")
-        html_path = f'/home/lubuntu/PycharmProjects/V/backend/reports/{urlparse(target).netloc}.html'
+        html_path = f'/home/ubuntu/backend/reports/{urlparse(target).netloc}.html'
         html_file = open(html_path, 'w')
         html_file.write(output)
         html_file.close()
         # issue of report
-        HTML(html_path).write_pdf(f'/home/lubuntu/PycharmProjects/V/backend/reports/{urlparse(target).netloc}.pdf', stylesheets=['/home/lubuntu/PycharmProjects/V/FYP/static/css/report.css'])
+        HTML(html_path).write_pdf(f'/home/ubuntu/backend/reports/{urlparse(target).netloc}.pdf', stylesheets=['/home/ubuntu/FYP/static/css/report.css'])
         # save vulnerable inputs
         self.save_inputs(target,xss,sqli,csrf)
 
@@ -375,7 +375,7 @@ class Controller():
             "sqli":{"vulnerable parameters":[sqli['p-links']],"vulnerable_forms":sqli['f-links']},
             "csrf":{"vulnerable_forms":[csrf['f-links']]}
         }
-        with open(f"/home/lubuntu/PycharmProjects/V/backend/v_inputs/{urlparse(target).netloc}.json",'w') as f:
+        with open(f"/home/ubuntu/backend/v_inputs/{urlparse(target).netloc}.json",'w') as f:
             json.dump(v_inputs,f)
 
     ##### Generate Chart #####
@@ -413,7 +413,7 @@ class Controller():
         ax1.pie(sizes,labels=labels,colors=colors,autopct='%1.1f%%',shadow=True,startangle=90)
         ax1.axis("equal")
         plt.legend()
-        plt.savefig(f"/home/lubuntu/PycharmProjects/V/FYP/charts/{urlparse(target).netloc}.png",bbox_inches='tight')
+        plt.savefig(f"/home/ubuntu/FYP/charts/{urlparse(target).netloc}.png",bbox_inches='tight')
         plt.close(fig1)
 
     def find_ratings(self,vulners,security_headers,risky_ports,csrf,cj,ports,Technologies):

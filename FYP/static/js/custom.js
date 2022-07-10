@@ -59,11 +59,11 @@ function send_req() {
         selection = $('#selection').val()
         $.ajax({
             'type':'POST',
-            'url':'http://127.0.0.1:8000/result/',
+            'url':'https://vscanner.me/result/',
             'data':{'search':url,'selection':selection,'csrfmiddlewaretoken':csrftoken},
             success:function(response) {
                 loader(true)
-                window.location = `http://127.0.0.1:8000/result/?target=${url}`
+                window.location = `https://vscanner.me/result/?target=${url}`
             },
             error: function(XMLHttpRequest, textStatus, errorThrown) {
                 loader(true)

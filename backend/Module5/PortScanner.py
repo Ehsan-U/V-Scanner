@@ -10,6 +10,7 @@ from rich.console import Console
 import scapy.all as sc
 import queue
 import logging
+from filelock import FileLock
 ###############logging##############
 # logger = logging.getLogger(__name__)
 # logger.setLevel(logging.DEBUG)
@@ -37,11 +38,14 @@ class PortScanner():
             self.queue.put(port)
 
     def load_ports(self):
-        with open("/home/lubuntu/PycharmProjects/V/backend/ports.json","r") as f:
-            top_1000_str = json.load(f)
-            # return list
-            ports = json.loads(top_1000_str)
-            print('loaded')
+        file = "/home/ubuntu/backend/ports.json"
+        lock = FileLock(file,timeout=2)
+        with lock:
+            with open(file,"r") as f:
+                top_1000_str = json.load(f)
+                # return list
+                ports = json.loads(top_1000_str)
+                print('loaded')
         return ports
 
     def connection(self,host,port,lock):
