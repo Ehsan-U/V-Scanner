@@ -1,1 +1,0 @@
-{"xss": {"vulnerable parameters": [["http://lms.ue.edu.pk/WebTop/Home.aspx?body="]], "vulnerable_forms": []}, "sqli": {"vulnerable parameters": [[]], "vulnerable_forms": ["http://lms.ue.edu.pk/ForgotPassword/ForgotPassword.aspx"]}, "csrf": {"vulnerable_forms": [[]]}}

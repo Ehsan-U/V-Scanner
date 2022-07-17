@@ -14,7 +14,7 @@ def wp_check(url):
     return is_wp(url)
     
 def is_wp(url):
-    r = s.get(url,allow_redirects=True).text
+    r = s.get(url,allow_redirects=True,timeout=5,headers={"User-Agent":user_agent}).text
     if "Powered by WordPress".lower() in r.lower():
         return True
     else:

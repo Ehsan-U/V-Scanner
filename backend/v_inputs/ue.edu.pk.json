@@ -1,1 +1,0 @@
-{"xss": {"vulnerable parameters": [[]], "vulnerable_forms": []}, "sqli": {"vulnerable parameters": [[]], "vulnerable_forms": []}, "csrf": {"vulnerable_forms": [["https://ue.edu.pk/uetech/", "https://ue.edu.pk/uetech/", "https://ue.edu.pk/uetech/", "https://ue.edu.pk/complaint.php", "https://ue.edu.pk/jrre/search.php"]]}}

@@ -16,7 +16,6 @@
         <link href="https://fonts.googleapis.com/css?family=Roboto" rel="stylesheet">
         <script src="https://cdn.jsdelivr.net/npm/js-cookie@3.0.1/dist/js.cookie.min.js"></script>
     </head>
-{#    <body style="font-family: Roboto;background-color: whitesmoke" data-aos-easing="ease" data-aos-duration="400" data-aos-delay="0">#}
     <body style="font-family: Roboto;background-color: whitesmoke">
         <nav class="navbar navbar-dark navbar-expand-lg fixed-top bg-dark navbar-custom">
             <div class="container">
@@ -29,9 +28,9 @@
                     <ul class="navbar-nav ms-auto">
                         <li class="nav-item dropdown">
                             {% if 'result' in request.path %}
-                                <a class="nav-link dropdown-toggle" role="link" data-bs-toggle="dropdown" href="#">REPORT</a>
+                                <a class="nav-link dropdown-toggle" id="report__" role="link" data-bs-toggle="dropdown" href="#">REPORT</a>
                             {% else %}
-                                <a class="nav-link dropdown-toggle disabled" role="link" data-bs-toggle="dropdown" href="#">REPORT</a>
+                                <a class="nav-link dropdown-toggle disabled" id="report__" role="link" data-bs-toggle="dropdown" href="#">REPORT</a>
                             {% endif %}
                             <div class="dropdown-menu">
                                 <a class="dropdown-item">

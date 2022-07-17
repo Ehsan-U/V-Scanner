@@ -1,78 +1,105 @@
 $(document).ready(function (){
     $("#grade_div").fadeIn("slow");
     $("[data-toggle='tooltip']").tooltip({animation:true});
+    
+    
 })
 
+function h_report(){
+    page = document.body.textContent
+    if (page.match("we are sorry, your request cannot be processed")) {
+        console.log("H_REPORTT")
+        element = document.getElementById("report__")
+        element.className = "nav-link dropdown-toggle disabled"
+    }
+    
+}
 
 //  validate input url
 function validate() {
-    console.log('validation')
-    main_element = document.getElementById("url");
-    url_div = document.getElementById("url_div")
-    if (main_element.value.length < 12) {
-          $(main_element).effect( "shake",{times:2,distance:8},600);
-          main_element.focus()
-          // stop loader when invalid input
-          return false
-    }
-    else {
-        console.log('validation regex')
-        element = document.getElementById("url").value.toLowerCase();
-        regex = new RegExp("http://\\w.*\\.\\w.*|https://\\w.*\\.\\w.*",)
-        if (regex.test(element) === false) {
+    try {
+        console.log('validation')
+        main_element = document.getElementById("url");
+        url_div = document.getElementById("url_div")
+        if (main_element.value.length < 12) {
             $(main_element).effect( "shake",{times:2,distance:8},600);
             main_element.focus()
             // stop loader when invalid input
             return false
         }
         else {
-            // continue loader when valid input
-            return true
-        }
-    }
-}
-
-function getCookie(name) {
-    let cookieValue = null;
-    if (document.cookie && document.cookie !== '') {
-        const cookies = document.cookie.split(';');
-        for (let i = 0; i < cookies.length; i++) {
-            const cookie = cookies[i].trim();
-            // Does this cookie string begin with the name we want?
-            if (cookie.substring(0, name.length + 1) === (name + '=')) {
-                cookieValue = decodeURIComponent(cookie.substring(name.length + 1));
-                break;
+            console.log('validation regex')
+            element = document.getElementById("url").value.toLowerCase();
+            regex = new RegExp("http://\\w.*\\.\\w.*|https://\\w.*\\.\\w.*",)
+            if (regex.test(element) === false) {
+                $(main_element).effect( "shake",{times:2,distance:8},600);
+                main_element.focus()
+                // stop loader when invalid input
+                return false
+            }
+            else {
+                // continue loader when valid input
+                return true
             }
         }
     }
-    return cookieValue;
+    catch (err) {
+        // 
+    }
+    
+}
+
+function getCookie(name) {
+    try {
+        let cookieValue = null;
+        if (document.cookie && document.cookie !== '') {
+            const cookies = document.cookie.split(';');
+            for (let i = 0; i < cookies.length; i++) {
+                const cookie = cookies[i].trim();
+                // Does this cookie string begin with the name we want?
+                if (cookie.substring(0, name.length + 1) === (name + '=')) {
+                    cookieValue = decodeURIComponent(cookie.substring(name.length + 1));
+                    break;
+                }
+            }
+        }
+        return cookieValue;
+    }
+    catch (err) {
+        // 
+    }
 }
 
 
 function send_req() {
-    valid = validate()
-    if (valid) {
-        loader()
-        // const csrftoken = Cookies.get('csrftoken');
-        const csrftoken = getCookie('csrftoken');
-        url = $('#url').val()
-        selection = $('#selection').val()
-        $.ajax({
-            'type':'POST',
-            'url':'https://vscanner.me/result/',
-            'data':{'search':url,'selection':selection,'csrfmiddlewaretoken':csrftoken},
-            success:function(response) {
-                loader(true)
-                window.location = `https://vscanner.me/result/?target=${url}`
-            },
-            error: function(XMLHttpRequest, textStatus, errorThrown) {
-                loader(true)
-            }
+    try {
+        valid = validate()
+        if (valid) {
+            loader()
+            // const csrftoken = Cookies.get('csrftoken');
+            const csrftoken = getCookie('csrftoken');
+            url = $('#url').val()
+            selection = $('#selection').val()
+            $.ajax({
+                'type':'POST',
+                'url':'http://127.0.0.1:8000/result/',
+                'data':{'search':url,'selection':selection,'csrfmiddlewaretoken':csrftoken},
+                success:function(response) {
+                    loader(true)
+                    window.location = `http://127.0.0.1:8000/result/?target=${url}`
+                },
+                error: function(XMLHttpRequest, textStatus, errorThrown) {
+                    loader(true)
+                }
 
-        })
+            })
+        }
+        else {
+            //pass
+        }
     }
-    else {
-        //pass
+    catch (err) {
+
     }
 }
 
@@ -99,7 +126,7 @@ function missing_cookie()
     }
     catch (err)
     {
-        alert(err);
+        // pass
     }
 }
 
@@ -165,26 +192,33 @@ function loader(stop=false) {
 // }
 
 if (window.location.href.match('result')){
+    h_report()
     responsive_grades()
+    window.addEventListener('onload',h_report)
     window.addEventListener('resize',responsive_grades)
 }
 
 
 function responsive_grades() {
-    console.log("grades")
-    width = document.documentElement.clientWidth
-    grades = document.getElementById('grades_display')
-    sections = document.querySelectorAll("[id='sect']")
-    if (width < 576) {
-        grades.className = 'mt-3 mb-3'
-        for (var i=0;i<sections.length;i++) {
-            sections[i].className = 'pt-5 pb-5'
+    try {
+        console.log("grades")
+        width = document.documentElement.clientWidth
+        grades = document.getElementById('grades_display')
+        sections = document.querySelectorAll("[id='sect']")
+        if (width < 576) {
+            grades.className = 'mt-3 mb-3'
+            for (var i=0;i<sections.length;i++) {
+                sections[i].className = 'pt-5 pb-5'
+            }
+        }
+        else if (width > 576) {
+            grades.className = 'container my-5'
+            for (var i=0;i<sections.length;i++) {
+                sections[i].className = 'ms-2 me-2 pt-5 pb-5'
+            }
         }
     }
-    else if (width > 576) {
-        grades.className = 'container my-5'
-        for (var i=0;i<sections.length;i++) {
-            sections[i].className = 'ms-2 me-2 pt-5 pb-5'
-        }
+    catch (err) {
+        // 
     }
 }

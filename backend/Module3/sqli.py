@@ -1,3 +1,4 @@
+import time
 from urllib.parse import urljoin,urlparse,parse_qs
 # from rich import console
 from rich.console import Console
@@ -19,6 +20,7 @@ import logging
 
 class SQLi():
     def __init__(self):
+        self.start = time.perf_counter()
         self.queue = queue.Queue()
 
     def main(self,urls,forms_d,vulnerabilities,depth,lock):
@@ -44,28 +46,28 @@ class SQLi():
     def decide_limits(self,urls,forms_d,depth):
         if depth:
             if urls != None and len(urls) > 0:
-                #urls = urls[:500]
+                urls = urls[:500]
                 return urls
             elif forms_d != None and len(forms_d.get("forms")) > 0:
-                # links = forms_d.get("links")[:250]
-                # forms = forms_d.get("forms")[:250]
-                links = forms_d.get("links")
-                forms = forms_d.get("forms")
+                links = forms_d.get("links")[:250]
+                forms = forms_d.get("forms")[:250]
+                #links = forms_d.get("links")
+                #forms = forms_d.get("forms")
                 # self.r.print("forms leng",len(forms))
                 return {"forms":forms,'links':links}
         else:
             if urls != None and len(urls) > 0:
-                #urls = urls[:250]
+                urls = urls[:250]
                 return urls
             elif forms_d != None and len(forms_d.get("forms")) > 0:
-                # links = forms_d.get("links")[:150]
-                # forms = forms_d.get("forms")[:150]
-                links = forms_d.get("links")
-                forms = forms_d.get("forms")
+                links = forms_d.get("links")[:125]
+                forms = forms_d.get("forms")[:125]
+                #links = forms_d.get("links")
+                #forms = forms_d.get("forms")
                 return {"forms":forms,'links':links}
 
     def verify_injection(self,url,session,user_agent):
-        resp = session.get(url,headers={'User-Agent':user_agent})
+        resp = session.get(url,headers={'User-Agent':user_agent},timeout=2)
         # here url is without any payload injection
         if resp.status_code == 500:
             return False
@@ -92,7 +94,7 @@ class SQLi():
                 for pvm in param_values:
                     modified_query = modified_query.replace(pvm[0],payload)
                 url = url.replace(urlparse(url).query,modified_query)
-                resp = session.get(url,headers={"User-Agent":user_agent})
+                resp = session.get(url,headers={"User-Agent":user_agent},timeout=2)
                 # handling internal error & redirection, (indicators of sqli)
                 if resp.status_code == 500:
                     print("[+] 500 received")
@@ -102,7 +104,7 @@ class SQLi():
                         # logger.info(f"SQL Injection found in link (inference) {url}")
                         lock.acquire(2)
                         self.vulnerabilities['SQLi']['status'] = True
-                        self.vulnerabilities['SQLi']['p-links'].append(original_url)
+                        self.vulnerabilities['SQLi']['p-links'].append(url)
                         lock.release()
                     else:
                         pass
@@ -114,7 +116,7 @@ class SQLi():
                             lock.acquire(2)
                             self.vulnerabilities['SQLi']['sure'] = True
                             self.vulnerabilities['SQLi']['status'] = True
-                            self.vulnerabilities['SQLi']['p-links'].append(original_url)
+                            self.vulnerabilities['SQLi']['p-links'].append(url)
                             lock.release()
                             break
                         else:
@@ -181,41 +183,30 @@ class SQLi():
                     data[name] = payload
                 # post request
                 if method == 'post':
-                    resp = session.post(url,headers={"User-Agent":user_agent},data=data)
+                    resp = session.post(url,headers={"User-Agent":user_agent},data=data,timeout=2)
                 # get request
                 elif method == "get":
-                    resp = session.get(url,headers={"User-Agent":user_agent},params=data)
-                # handling internal error , (indicators of sqli)
-                if resp.status_code == 500:
-                    if self.verify_injection(url,session,user_agent):
-                        print(f"[+] SQL injection Found in form (inference)")
-                        # logger.info("SQL Injection found in form (inference)")
+                    resp = session.get(url,headers={"User-Agent":user_agent},params=data,timeout=2)
+                for error in errors:
+                    if error in resp.text.lower():
+                        print(f"[+] SQL Injection Discovered in form {url}")
+                        # logger.info(f"SQL Injection found in form {url}")
                         lock.acquire(2)
+                        self.vulnerabilities['SQLi']['sure'] = True
                         self.vulnerabilities['SQLi']['status'] = True
                         self.vulnerabilities['SQLi']['f-links'].append(url)
+                        self.vulnerabilities['SQLi']['data'].append(data)
                         lock.release()
+                        break
                     else:
-                        pass
-                else:
-                    for error in errors:
-                        if error in resp.text.lower():
-                            print(f"[+] SQL Injection Discovered in form {url}")
-                            # logger.info(f"SQL Injection found in form {url}")
-                            lock.acquire(2)
-                            self.vulnerabilities['SQLi']['sure'] = True
-                            self.vulnerabilities['SQLi']['status'] = True
-                            self.vulnerabilities['SQLi']['f-links'].append(url)
-                            lock.release()
-                            break
-                        else:
-                            continue
+                        continue
             except:
                 print("[+] error in injection (forms)")
  
 
     def run(self,session,flag,lock):
         threads = []
-        for i in range(50):
+        for i in range(200):
             item = self.queue.get()
             t = threading.Thread(target=self.injection,args=(session,item,flag,lock))
             t.daemon = True
@@ -226,7 +217,9 @@ class SQLi():
         for th in threads:
             th.join()
         if not self.queue.empty():
-            self.run(session,flag,lock)
+            end = time.perf_counter() - self.start
+            if end <= 40.0:
+                self.run(session,flag,lock)
 #     def __init__(self):
 #         self.payload = u"a'b\"c'd\""
 #         self.errors = self.get_errors()

@@ -45,3 +45,21 @@
 # }
 # resp = s.get('https://httpbin.org/ip',proxies=proxy)
 # print(resp.text)
+# import socket
+# def connection(host,port):
+#     port = 2121
+#     host = "45.60.24.237"
+#     s = socket.socket(socket.AF_INET,socket.SOCK_STREAM)
+#     s.settimeout(1)
+#     try:
+#         result = s.connect((host,port))
+#         print('sss')
+#         # if result == 0:
+#         #     print(port,' OPEN')
+#         # else:
+#         #     print(port,' CLOSED')
+#         #     pass
+#     except:
+#         pass
+
+# connection(None,None)

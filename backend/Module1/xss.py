@@ -1,4 +1,5 @@
 from concurrent.futures import thread
+import time
 from requests_html import HTMLSession
 from urllib.parse import urlparse,parse_qs
 from colorama import Fore,init
@@ -21,10 +22,11 @@ import logging
 class Xss():
     def __init__(self):
         self.queue = queue.Queue()
+        self.start = time.perf_counter()
 
     def main(self,urls,forms_d,vulnerabilities,depth,headers,lock):
         self.vulnerabilities = vulnerabilities
-        if not headers['Security-Headers']['X-XSS-Protection']:
+        if not headers['Security-Headers'].get('X-XSS-Protection'):
             session = HTMLSession()
             if urls:
                 urls = self.decide_limits(urls,forms_d,depth)
@@ -49,21 +51,21 @@ class Xss():
                 #urls = urls[:500]
                 return urls
             elif forms_d != None and len(forms_d.get("forms")) > 0:
-                # links = forms_d.get("links")[:250]
-                links = forms_d.get("links")
-                # forms = forms_d.get("forms")[:250]
-                forms = forms_d.get("forms")
+                links = forms_d.get("links")[:250]
+                #links = forms_d.get("links")
+                forms = forms_d.get("forms")[:250]
+                #forms = forms_d.get("forms")
                 # self.r.print("forms leng",len(forms))
                 return {"forms":forms,'links':links}
         else:
             if urls != None and len(urls) > 0:
-                #urls = urls[:250]
+                urls = urls[:250]
                 return urls
             elif forms_d != None and len(forms_d.get("forms")) > 0:
-                # links = forms_d.get("links")[:150]
-                # forms = forms_d.get("forms")[:150]
-                links = forms_d.get("links")
-                forms = forms_d.get("forms")
+                links = forms_d.get("links")[:125]
+                forms = forms_d.get("forms")[:125]
+                #links = forms_d.get("links")
+                #forms = forms_d.get("forms")
                 return {"forms":forms,'links':links}
 
     def start_xss(self,session,item,flag,lock):
@@ -90,13 +92,13 @@ class Xss():
                     modified_url_query = modified_url_query.replace(pmv[0],payload)
                 # replacing url query with modified query
                 url = url.replace(urlparse(url).query,modified_url_query)
-                resp = session.get(url,headers={"User-Agent":user_agent})
+                resp = session.get(url,headers={"User-Agent":user_agent},timeout=2)
                 if payload in resp.text.lower():
                     print(f"\n[+] XSS Discovered in Parameter {url}")
                     # logger.info(f"[+] XSS Discovered in Parameter {url}")
                     lock.acquire(2)
                     self.vulnerabilities["XSS"]["status"] = True
-                    self.vulnerabilities["XSS"]["p-links"].append(original_url)
+                    self.vulnerabilities["XSS"]["p-links"].append(url)
                     lock.release()
                 else:
                     pass
@@ -161,10 +163,10 @@ class Xss():
                     data[name] = payload
                 # post request
                 if method == 'post':
-                    resp = session.post(url,headers={"User-Agent":user_agent},data=data)
+                    resp = session.post(url,headers={"User-Agent":user_agent},data=data,timeout=2)
                 # get request
                 elif method == "get":
-                    resp = session.get(url,headers={"User-Agent":user_agent},params=data)
+                    resp = session.get(url,headers={"User-Agent":user_agent},params=data,timeout=2)
                 # self.r.print(data)
                 if payload in resp.text.lower():
                     print(f"\n[+] XSS Discovered in Form {url}")
@@ -172,6 +174,7 @@ class Xss():
                     lock.acquire(2)
                     self.vulnerabilities["XSS"]["status"] = True
                     self.vulnerabilities["XSS"]["f-links"].append(url)
+                    self.vulnerabilities["XSS"]["data"].append(data)
                     lock.release()
                 else:
                     pass
@@ -184,7 +187,7 @@ class Xss():
         threads = []
         # try 
         # threadpool
-        for i in range(50):
+        for i in range(200):
             item = self.queue.get()
             t = threading.Thread(target=self.start_xss,args=(session,item,flag,lock))
             t.daemon = True
@@ -195,7 +198,9 @@ class Xss():
         for th in threads:
             th.join()
         if not self.queue.empty():
-            self.run(session,flag,lock)
+            end = time.perf_counter() - self.start
+            if end <= 40.0:
+                self.run(session,flag,lock)
 
     # async def main(self,urls,forms_d,vulnerabilities,depth,headers):
     #     # print("\rXSS starting",end="")

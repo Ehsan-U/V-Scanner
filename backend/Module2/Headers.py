@@ -33,7 +33,7 @@ class Header_Manipulation():
         session = requests_html.HTMLSession()
         security_headers = ['X-Frame-Options','Content-Security-Policy','Strict-Transport-Security','X-Content-Type-Options','X-XSS-Protection']
         try:
-            resp = session.get(self.url, headers={'User-Agent': self.user_agent}, timeout=2, allow_redirects=True)
+            resp = session.get(self.url, headers={'User-Agent': self.user_agent}, timeout=5, allow_redirects=True)
         except:
             r.print_exception()
             # logger.exception("Error in check_headers (Headers)")
@@ -43,7 +43,7 @@ class Header_Manipulation():
             else:
                 r.print("Headers Cant be extracted! timeout")
                 # logger.info("Headers cant be extracted! timeout (Headers)")
-                return None
+                return self.headers_info
         else:
             #r.print(resp.status_code)
             if resp.status_code == 200:
@@ -197,8 +197,11 @@ class Header_Manipulation():
                 self.headers_info["Technology"][0] = True
                 self.headers_info["Technology"].append("Wordpress")
                 self.headers_info["Technology"].append("The server is leaking the senstive information about technology")
-        outputt = subprocess.check_output(['python3', '/home/lubuntu/PycharmProjects/V/backend/Module2/builtw.py', '-u', f'{self.url}', '-a', f'{self.user_agent}'],shell=False)
-        site_data = ast.literal_eval(outputt.decode("utf-8"))
+        try:
+            outputt = subprocess.check_output(['python3', '/home/lubuntu/PycharmProjects/V/backend/Module2/builtw.py', '-u', f'{self.url}', '-a', f'{self.user_agent}'],shell=False)
+            site_data = ast.literal_eval(outputt.decode("utf-8"))
+        except:
+            site_data = False
         if bool(site_data):
             print('FLAG TRUE')
             if not self.headers_info["Technology"][0]:
@@ -249,7 +252,7 @@ class Header_Manipulation():
         for head,val in security_headers.items():
             if head == "Content-Security-Policy" and val == False:
                 try:
-                    resp = requests.get(self.url,timeout=2,headers={'User-Agent':self.user_agent}).text
+                    resp = requests.get(self.url,timeout=5,headers={'User-Agent':self.user_agent}).text
                 except:
                     pass
                 else:

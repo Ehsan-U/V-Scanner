@@ -32,6 +32,7 @@ import hashlib
 
 class FYP_Crawler():
     def __init__(self,url,depth):
+        self.start= time.perf_counter()
         self.target = url
         self.queue = Queue()
         self.urls = {"urls":set(),"hashes":[]}
@@ -42,14 +43,13 @@ class FYP_Crawler():
         # for storing custom made param links
         self.check = True
         self.vulnerabilities = {
-            "XSS":{'status':False,'p-links':[],'f-links':[]},
-            "SQLi":{'status':False,'p-links':[],'f-links':[],"sure":False},
+            "XSS":{'status':False,'p-links':[],'f-links':[],'data':[]},
+            "SQLi":{'status':False,'p-links':[],'f-links':[],"sure":False,'data':[]},
             "CSRF":{"status":False,'f-links':[]},
             "ClickJacking":{"status":False}
             }
         self.allowed = urlparse(self.target).netloc
         # count how many links extracted from each response
-        self.count = 0
         self.depth = depth
 
     # manage requests
@@ -57,6 +57,8 @@ class FYP_Crawler():
         session = HTMLSession()
         # first time follow given target
         if not url:
+            if urlparse(url).query:
+                self.param_links["param_urls"].add(url)            
             self.do_req(self.target,session,lock)
         # recursively follow urls
         elif url:
@@ -135,7 +137,7 @@ class FYP_Crawler():
             lock.acquire(2)
             #print(f"{response.url} >> {self.count}")
             #count how many link extracted from each response
-            self.count = 0
+            check = self.check
             lock.release()
             # extracting forms
             if "</form>" in response.text:
@@ -143,7 +145,7 @@ class FYP_Crawler():
                 # logger.info(f"[+] Form Found {url}")
                 self.extract_forms(url,response,session,lock)
             # will run once to enable threading
-            if self.check:
+            if check:
                 if not self.queue.empty():
                     #print("\n[+] Starting Threading \n")
                     self.check = False
@@ -181,7 +183,7 @@ class FYP_Crawler():
                                 self.urls['hashes'].append(url_id)
                                 self.urls['urls'].add(url)
                                 self.queue.put(url)
-                                self.count +=1
+                                
                                 self.param_links['hashes'].append(url_id)
                                 self.param_links["param_urls"].add(url)
                         else:
@@ -190,7 +192,7 @@ class FYP_Crawler():
                         if len(urls) < to_crawl:
                             self.urls['urls'].add(url)
                             self.queue.put(url)
-                            self.count +=1
+                            
                     lock.release()
                     # if url has parameter
                     # if urlparse(url).query:
@@ -235,7 +237,7 @@ class FYP_Crawler():
                                     self.urls['hashes'].append(url_id)
                                     self.urls['urls'].add(url)
                                     self.queue.put(url)
-                                    self.count +=1
+                                    
                                     self.param_links['hashes'].append(url_id)
                                     self.param_links["param_urls"].add(url)
                             else:
@@ -244,7 +246,7 @@ class FYP_Crawler():
                             if len(urls) < to_crawl:
                                 self.urls['urls'].add(url)
                                 self.queue.put(url)
-                                self.count +=1
+                                
                         lock.release()
                         # if url has parameter
                         # if urlparse(url).query:
@@ -314,7 +316,7 @@ class FYP_Crawler():
         # quantity of threads depends on queue size
         # number of threads starts = queue size
         # then break the loop
-        for i in range(100):
+        for i in range(120):
             url = self.queue.get()
             #print(f"Thread {i} started")
             t = threading.Thread(target=self.manage_req,args=(lock,url),daemon=True)
@@ -330,10 +332,14 @@ class FYP_Crawler():
             thr.join()
         # check whether queue is empty, if not then continue
         if not self.queue.empty():
+            end = time.perf_counter() - self.start
             if not self.depth and len(self.urls) <= 500:
                 self.run(lock)
-            elif self.depth and len(self.urls) <=5000:
-                self.run(lock)
+            elif self.depth and end < 300.0:
+                if len(self.urls) <=5000:
+                    self.run(lock)
+                else:
+                    print("\nTime Shortage\n")
         # r.save_html("/home/lubuntu/FYP/logs/crawler_logs.html")
 
 

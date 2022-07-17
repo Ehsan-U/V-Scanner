@@ -27,58 +27,62 @@ def home(request):
     return render(request,"before.html")
 
 def result(request):
-    if request.method.lower() == 'post':
-        req_url = request.POST.get("search").strip().encode('utf-8')
-        filename = hashlib.md5(req_url).hexdigest()
-        datafile = f'/home/ubuntu/FYP/result_data/{filename}.json'
-        data = get_data(request)
-        lock = FileLock(datafile,timeout=2)
-        with lock:
+    try:
+        if request.method.lower() == 'post':
+            req_url = request.POST.get("search").strip().encode('utf-8')
+            filename = hashlib.md5(urlparse(req_url).netloc).hexdigest()
+            datafile = f'/home/lubuntu/PycharmProjects/V/FYP/result_data/{filename}.json'
+            print(datafile)
+            data = get_data(request)
             if os.path.exists(datafile):
                 os.remove(datafile)
             with open(datafile,'w') as f:
                 json.dump(data,f)
-        return HttpResponse('OK')
-    elif request.method.lower() == 'get':
-        req_url = request.GET.get("target",'None').encode('utf-8')
-        filename = hashlib.md5(req_url).hexdigest()
-        datafile = f'/home/ubuntu/FYP/result_data/{filename}.json'
-        if os.path.exists(datafile):
-            with open(datafile,'r') as f:
-                data = json.load(f)
-            if data != "Timeout" and data != "Down":
-                try:
-                    metadata = zip(data[0].keys(),data[0].values())
-                    raw_headers = zip(data[1].keys(),data[1].values())
-                    security_headers = zip(data[2].keys(),data[2].values())
-                    technologiese = zip(data[3].keys(),data[3].values())
-                    grade = data[4]
-                    # vulnerabilities
-                    xss = data[5]
-                    sqli = data[6]
-                    csrf = data[7]
-                    cj = data[8]
-                    ports = data[9]
-                    cookies = data[10]
-                    # risky ports
-                    risky_p = data[11]
-                except Exception as e:
-                    r.print_exception()
-                    print(f"error in {e}")
-                    context = {"code":[5,0,4],"error":"Timeout"}
+            return HttpResponse('OK')
+        elif request.method.lower() == 'get':
+            req_url = request.GET.get("target",'None').encode('utf-8')
+            filename = hashlib.md5(urlparse(req_url).netloc).hexdigest()
+            datafile = f'/home/lubuntu/PycharmProjects/V/FYP/result_data/{filename}.json'
+            if  os.path.exists(datafile):
+                with open(datafile,'r') as f:
+                    data = json.load(f)
+                if data != "Timeout" and data != "Down":
+                    try:
+                        metadata = zip(data[0].keys(),data[0].values())
+                        raw_headers = zip(data[1].keys(),data[1].values())
+                        security_headers = zip(data[2].keys(),data[2].values())
+                        technologiese = zip(data[3].keys(),data[3].values())
+                        grade = data[4]
+                        # vulnerabilities
+                        xss = data[5]
+                        sqli = data[6]
+                        csrf = data[7]
+                        cj = data[8]
+                        ports = data[9]
+                        cookies = data[10]
+                        # risky ports
+                        risky_p = data[11]
+                    except Exception as e:
+                        r.print_exception()
+                        print(f"error in {e}")
+                        context = {"code":[5,0,4],"error":"Timeout"}
+                        return render(request,"error.html",context)
+                    else:
+                        context = {"Metadata":metadata,"Raw_headers":raw_headers,"Security_headers":security_headers,"Technologies":technologiese,"Grade":grade,"xss":xss,"sqli":sqli,'csrf':csrf,'cj':cj,'ports':ports,'cookies':cookies,"risky_p":risky_p}
+                        return render(request,"after.html",context)    
+                elif data == 'Down':
+                    context = {"code":[5,0,3],"error":"Target Down"}
                     return render(request,"error.html",context)
                 else:
-                    context = {"Metadata":metadata,"Raw_headers":raw_headers,"Security_headers":security_headers,"Technologies":technologiese,"Grade":grade,"xss":xss,"sqli":sqli,'csrf':csrf,'cj':cj,'ports':ports,'cookies':cookies,"risky_p":risky_p}
-                    return render(request,"after.html",context)    
-            elif data == 'Down':
-                context = {"code":[5,0,3],"error":"Target Down"}
-                return render(request,"error.html",context)
+                    context = {"code":[5,0,4],"error":"Timeout"}
+                    return render(request,"error.html",context)
             else:
                 context = {"code":[5,0,4],"error":"Timeout"}
                 return render(request,"error.html",context)
-        else:
-            context = {"code":[5,0,4],"error":"Timeout"}
-            return render(request,"error.html",context)
+    except:
+        r.print_exception()
+        context = {"code":[5,0,4],"error":"Timeout"}
+        return render(request,"error.html",context)
 
 def validate_url(url):
 	try:
@@ -96,6 +100,7 @@ def get_data(request):
     start_counter = time.perf_counter()
     start_time = get_time()
     target = request.POST.get("search").strip()
+    # print(target)
     mode = request.POST.get("selection")
     if mode == "deep":
         deep = True
@@ -106,7 +111,11 @@ def get_data(request):
     scheme =parsed_t.scheme
     domain = parsed_t.netloc
     path = parsed_t.path
-    url = scheme+"://"+domain+path
+    query = parsed_t.query
+    if query:
+        url = scheme+"://"+domain+path+"?"+query
+    else:
+        url = scheme+"://"+domain+path
     body_data = {"depth":deep,"target":url,"start_time":start_time,"start_counter":start_counter}
     api = f"http://127.0.0.1:8081/result/"
     valid = validate_url(url)
@@ -188,7 +197,7 @@ def get_data(request):
             vulners = [xss, sqli]
             grade = find_score(security_headers,copy.deepcopy(cookies),target,vulners)
             risky_ports = ["21", "23", "25", "53", "139", "445", "1433", "1434", "3306", "3389"]
-
+            print("returninh....")
             return metadata,raw_headers,security_headers,Technologies,grade,xss,sqli,csrf,cj,ports,cookies,risky_ports
     except:
         r.print_exception()
@@ -281,7 +290,7 @@ def fetch_pdf(request):
     if request.method.lower() == 'post':
         if request.headers.get("Host") == '127.0.0.1:8000':
             target = request.POST.get("report").strip()
-            pdf = f"/home/ubuntu/backend/reports/{urlparse(target).netloc}.pdf"
+            pdf = f"/home/lubuntu/PycharmProjects/V/backend/reports/{urlparse(target).netloc}.pdf"
             return FileResponse(open(pdf,"rb"),as_attachment=True,filename=f"{urlparse(target).netloc}.pdf",content_type="application/pdf")
         else:
             context = {"code":[4,0,4],"error":"Not Found"}
@@ -294,7 +303,7 @@ def v_inputs(request):
     if request.method.lower() == 'post':
         if request.headers.get("Host") == '127.0.0.1:8000':
             target = request.POST.get("v_inputs").strip()
-            vulner_inputs = f"/home/ubuntu/backend/v_inputs/{urlparse(target).netloc}.json"
+            vulner_inputs = f"/home/lubuntu/PycharmProjects/V/backend/v_inputs/{urlparse(target).netloc}.json"
             opened = open(vulner_inputs,'r')
             content_type = 'application/json'
             response = HttpResponse(opened,content_type=content_type)

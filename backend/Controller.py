@@ -35,15 +35,11 @@ class Controller():
     def __init__(self):
         self.responses = []
         self.jquery_data = {}
-
-
-    def chk_headers(self,url):
-        checker = Header_Manipulation(url)
-        return checker.check_headers()
    
     def main(self,url,depth,start_time,start_counter):
+        con = Console()
         crawl = FYP_Crawler(url,depth)
-        headers_info = self.chk_headers(url)
+        header_checker = Header_Manipulation(url)
         xs = Xss()
         sqli = SQLi()
         csrf = CSRF()
@@ -54,9 +50,10 @@ class Controller():
             # headers manipulation *returns missing security headers
             vulnerabilities = crawl.vulnerabilities
             crawled_links = len(crawl.urls.get("urls"))
-            urls = list(crawl.urls.get("urls"))[:50]
+            urls = list(crawl.urls.get("urls"))[:10]
             param_urls = list(crawl.param_links.get("param_urls"))
             forms_d = crawl.forms
+            headers_info = header_checker.check_headers()
             # xss,sqli links
             if len(param_urls) > 0:
                 print("Checking Links")
@@ -96,20 +93,20 @@ class Controller():
             jquery_copy = copy.deepcopy(self.jquery_data)
             end = time.perf_counter()-float(start_counter)
             try:
-
                 self.to_pdf(url,vulners,headers,start_time,end,ports_copy,jquery_copy,crawled_links)
             except Exception as e:
-                print(e)
+                con.print_exception()
             print("Finishing")
             # logger.info("Finishing")
             return vulnerabilities,headers_info,ports,self.jquery_data
-        except:
+        except Exception as e:
+            con.print_exception()
             return [{"cause":'timeout'}]
 
     def jq(self,urls):
         flag = False
         session = HTMLSession()
-        with ThreadPoolExecutor(max_workers=50) as exec:
+        with ThreadPoolExecutor(max_workers=10) as exec:
             responses = exec.map(self.do_req,urls)
         self.responses = responses
         self.check_jquery(flag)
@@ -117,7 +114,7 @@ class Controller():
     def do_req(self,url):
         session = HTMLSession()
         user_agent = "Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/101.0.4951.41 Safari/537.36"
-        resp = session.get(url,headers={"User-Agent":user_agent})
+        resp = session.get(url,headers={"User-Agent":user_agent},timeout=2)
         return resp
 
     def check_jquery(self,flag):
@@ -204,7 +201,7 @@ class Controller():
         # cookies already there above
         template_loader = jinja2.FileSystemLoader("/")
         template_Env = jinja2.Environment(loader=template_loader)
-        template_file = "/home/ubuntu/backend/Misc/report.html"
+        template_file = "/home/lubuntu/PycharmProjects/V/backend/Misc/report.html"
         template = template_Env.get_template(template_file)
         output = template.render(
             host = target,
@@ -225,8 +222,8 @@ class Controller():
             chart = urlparse(target).netloc
         )
         # delete already present files
-        filehtml = f"/home/ubuntu/backend/reports/{urlparse(target).netloc}.html"
-        filepdf = f"/home/ubuntu/backend/reports/{urlparse(target).netloc}.pdf"
+        filehtml = f"/home/lubuntu/PycharmProjects/V/backend/reports/{urlparse(target).netloc}.html"
+        filepdf = f"/home/lubuntu/PycharmProjects/V/backend/reports/{urlparse(target).netloc}.pdf"
         if os.path.exists(filehtml) and os.path.exists(filepdf):
             os.remove(filehtml)
             os.remove(filepdf)
@@ -235,12 +232,12 @@ class Controller():
         else:
             print("Files not present")
             # logger.info("[+] File not present")
-        html_path = f'/home/ubuntu/backend/reports/{urlparse(target).netloc}.html'
+        html_path = f'/home/lubuntu/PycharmProjects/V/backend/reports/{urlparse(target).netloc}.html'
         html_file = open(html_path, 'w')
         html_file.write(output)
         html_file.close()
         # issue of report
-        HTML(html_path).write_pdf(f'/home/ubuntu/backend/reports/{urlparse(target).netloc}.pdf', stylesheets=['/home/ubuntu/FYP/static/css/report.css'])
+        HTML(html_path).write_pdf(f'/home/lubuntu/PycharmProjects/V/backend/reports/{urlparse(target).netloc}.pdf', stylesheets=['/home/lubuntu/PycharmProjects/V/FYP/static/css/report.css'])
         # save vulnerable inputs
         self.save_inputs(target,xss,sqli,csrf)
 
@@ -371,11 +368,11 @@ class Controller():
 
     def save_inputs(self,target,xss,sqli,csrf):
         v_inputs = {
-            "xss":{"vulnerable parameters":[xss['p-links']],"vulnerable_forms":xss['f-links']},
-            "sqli":{"vulnerable parameters":[sqli['p-links']],"vulnerable_forms":sqli['f-links']},
+            "xss":{"vulnerable parameters":[xss['p-links']],"vulnerable_forms":xss['f-links'],'data':xss['data']},
+            "sqli":{"vulnerable parameters":[sqli['p-links']],"vulnerable_forms":sqli['f-links'],'data':sqli['data']},
             "csrf":{"vulnerable_forms":[csrf['f-links']]}
         }
-        with open(f"/home/ubuntu/backend/v_inputs/{urlparse(target).netloc}.json",'w') as f:
+        with open(f"/home/lubuntu/PycharmProjects/V/backend/v_inputs/{urlparse(target).netloc}.json",'w') as f:
             json.dump(v_inputs,f)
 
     ##### Generate Chart #####
@@ -413,7 +410,7 @@ class Controller():
         ax1.pie(sizes,labels=labels,colors=colors,autopct='%1.1f%%',shadow=True,startangle=90)
         ax1.axis("equal")
         plt.legend()
-        plt.savefig(f"/home/ubuntu/FYP/charts/{urlparse(target).netloc}.png",bbox_inches='tight')
+        plt.savefig(f"/home/lubuntu/PycharmProjects/V/FYP/charts/{urlparse(target).netloc}.png",bbox_inches='tight')
         plt.close(fig1)
 
     def find_ratings(self,vulners,security_headers,risky_ports,csrf,cj,ports,Technologies):
@@ -472,7 +469,6 @@ def result(item:Item):
         print(e)
         results = [{"cause":'timeout'}]
     finally:
-        print(results)
         return results
 
 if __name__=='__main__':

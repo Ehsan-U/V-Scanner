@@ -32,7 +32,7 @@ class CSRF():
                 flag = False
                 inp_name = []
                 # self.con.print(form.attrib.get("method").lower())
-                if form.attrib.get("method","GET").lower() == "post":
+                if form.attrib.get("method",'GET').lower() == "get":
                     try:
                         for input in form.xpath(".//input"):
                             if input.attrib.get("type") == "hidden":

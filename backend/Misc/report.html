@@ -16,7 +16,7 @@
 <body style="color: black;">
     <div id="page1" style="background-color: #485461;background-image: linear-gradient(315deg, #485461 0%, #28313b 74%);">
         <div class="container text-center">
-            <img style="height: 250px;width: 250px; margin-top: 7rem" src="/home/ubuntu/FYP/templates/LOGO.svg" >
+            <img style="height: 250px;width: 250px; margin-top: 7rem" src="/home/lubuntu/PycharmProjects/V/FYP/templates/LOGO.svg" >
             <h1 class="mt-3" style="font-size: 35px">V-Scanner</h1>
             <p>Web-based Assessment Tool For Web Applications</p>
         </div>
@@ -148,7 +148,7 @@
                 </div>
                 <div class="col-4 text-center" style="width: 15rem;margin-left:25px">
                     <h5 style="color: darkblue;font-size: 20px;">Issues Ratio:</h5>
-                    <img src="/home/ubuntu/FYP/charts/{{chart}}.png" style="height: 250px;width: 250px;margin-top: 15px;">
+                    <img src="/home/lubuntu/PycharmProjects/V/FYP/charts/{{chart}}.png" style="height: 250px;width: 250px;margin-top: 15px;">
                 </div>
                 <div class="col-4 ms-4 " style="width: 275px;">
                     <h5 style="color: darkblue;font-size: 20px;margin-left: 1rem;padding-left: 2rem;margin-bottom: 15px;">Scan Information:</h5>
@@ -166,7 +166,7 @@
         <div class="container">
             <div class="mt-4 mb-4">
                 <h2 style="margin-bottom: 15px;">Results For Target</h2>
-                <img src="/home/ubuntu/FYP/static/images/arrow.svg" style="height: 25px;width: 25px;display: inline;padding-bottom: 5px;"><h5 style="display: inline;color:darkblue;">&nbsp;{{ target_ip }}&nbsp;</h5><img src="/home/ubuntu/FYP/static/images/arrow.svg" style="height: 25px;width: 25px;display: inline;padding-bottom: 5px;"><h5 style="display: inline;">&nbsp;Headers</h5>
+                <img src="/home/lubuntu/PycharmProjects/V/FYP/static/images/arrow.svg" style="height: 25px;width: 25px;display: inline;padding-bottom: 5px;"><h5 style="display: inline;color:darkblue;">&nbsp;{{ target_ip }}&nbsp;</h5><img src="/home/lubuntu/PycharmProjects/V/FYP/static/images/arrow.svg" style="height: 25px;width: 25px;display: inline;padding-bottom: 5px;"><h5 style="display: inline;">&nbsp;Headers</h5>
                 <hr style="color:orange; height: 3px;margin-bottom: 20px;">
             </div>
 
@@ -186,7 +186,7 @@
                                     <td><h6  style="display: inline-block;">Description:</h6><br>Control the loading of resources in a website and block any request that is intended for malicious or unknown resource.</td>
                                 </tr>
                                 <tr>
-                                    <td><h6 style="display: inline-block;">Result: <img src="/home/ubuntu/FYP/static/images/missing.svg" style="height: 20px;width: 20px;padding-bottom: 1px;"> </h6><br>It was detected that target website is missing Content-Security-Policy header.</td>
+                                    <td><h6 style="display: inline-block;">Result: <img src="/home/lubuntu/PycharmProjects/V/FYP/static/images/missing.svg" style="height: 20px;width: 20px;padding-bottom: 1px;"> </h6><br>It was detected that target website is missing Content-Security-Policy header.</td>
                                 </tr>
                                 <tr>
                                     <td><h6 style="display: inline-block;">Impact:</h6><br>Absense of 'Content-Security-Policy' increases the chances of Cross-site Scripting (XSS) and other data injection attacks which lead to data theft, site defacement and malware distribution.</td>
@@ -202,7 +202,7 @@
                                     <td><h6  style="display: inline-block;">Description:</h6><br>Control the loading of resources in a website and block any request that is intended for malicious or unknown resource.</td>
                                 </tr>
                                 <tr>
-                                    <td><h6 style="display: inline-block;">Result: <img src="/home/ubuntu/FYP/static/images/correct.svg" style="height: 20px;width: 20px;padding-bottom: 1px;"> </h6><br>It was detected that target website is using Content-Security-Policy header.</td>
+                                    <td><h6 style="display: inline-block;">Result: <img src="/home/lubuntu/PycharmProjects/V/FYP/static/images/correct.svg" style="height: 20px;width: 20px;padding-bottom: 1px;"> </h6><br>It was detected that target website is using Content-Security-Policy header.</td>
                                 </tr>
                                 <tr>
                                     <td><h6 style="display: inline-block;">Reference: </h6><br><a href="https://developer.mozilla.org/en-US/docs/Web/HTTP/CSP">https://developer.mozilla.org/en-US/docs/Web/HTTP/CSP</a></td>
@@ -234,7 +234,7 @@
                                     <td><h6  style="display: inline-block;">Description:</h6><br>HSTS ensures that website will only be accessible over HTTPS, It protects the website from ssl-striping attacks.</td>
                                 </tr>
                                 <tr>
-                                    <td><h6 style="display: inline-block;">Result: <img src="/home/ubuntu/FYP/static/images/missing.svg" style="height: 20px;width: 20px;padding-bottom: 1px;"> </h6><br>It was detected that target website is missing Strict-Transport-Security header.</td>
+                                    <td><h6 style="display: inline-block;">Result: <img src="/home/lubuntu/PycharmProjects/V/FYP/static/images/missing.svg" style="height: 20px;width: 20px;padding-bottom: 1px;"> </h6><br>It was detected that target website is missing Strict-Transport-Security header.</td>
                                 </tr>
                                 <tr>
                                     <td><h6 style="display: inline-block;">Impact:</h6><br>Absense of Strict-Transport-Security caused ssl-striping which in turn leads to Man-in-the-middle (MITM) and other eavesdropping attacks that can result in data theft, credential stealing and payload delivery.</td>
@@ -250,7 +250,7 @@
                                     <td><h6  style="display: inline-block;">Description:</h6><br>HSTS ensures that website will only be accessible over HTTPS, It protects the website from ssl-striping attacks.</td>
                                 </tr>
                                 <tr>
-                                    <td><h6 style="display: inline-block;">Result: <img src="/home/ubuntu/FYP/static/images/correct.svg" style="height: 20px;width: 20px;padding-bottom: 1px;"> </h6><br>It was detected that target website is using Strict-Transport-Security header.</td>
+                                    <td><h6 style="display: inline-block;">Result: <img src="/home/lubuntu/PycharmProjects/V/FYP/static/images/correct.svg" style="height: 20px;width: 20px;padding-bottom: 1px;"> </h6><br>It was detected that target website is using Strict-Transport-Security header.</td>
                                 </tr>
                                 <tr>
                                     <td><h6  style="display: inline-block;">Reference: </h6><br><a href="https://developer.mozilla.org/en-US/docs/Web/HTTP/Headers/Strict-Transport-Security">https://developer.mozilla.org/en-US/docs/Web/HTTP/Headers/Strict-Transport-Security</a> </td>
@@ -286,7 +286,7 @@
                                     <td><h6  style="display: inline-block;">Description:</h6><br>X-Content-Type-Options header protect against MIME type sniffing attacks.</td>
                                 </tr>
                                 <tr>
-                                    <td><h6 style="display: inline-block;">Result: <img src="/home/ubuntu/FYP/static/images/missing.svg" style="height: 20px;width: 20px;padding-bottom: 1px;"> </h6><br>It was detected that target website is missing X-Content-Type-Options header.</td>
+                                    <td><h6 style="display: inline-block;">Result: <img src="/home/lubuntu/PycharmProjects/V/FYP/static/images/missing.svg" style="height: 20px;width: 20px;padding-bottom: 1px;"> </h6><br>It was detected that target website is missing X-Content-Type-Options header.</td>
                                 </tr>
                                 <tr>
                                     <td><h6 style="display: inline-block;">Impact:</h6><br>Absense of X-Content-Type-Options caused MIME sniffing which is a technique used by browsers to determine the type of resource that received in response. This technique can be used by attackers to perform XSS.</td>
@@ -302,7 +302,7 @@
                                     <td><h6  style="display: inline-block;">Description:</h6><br>X-Content-Type-Options header protect against MIME type sniffing attacks.</td>
                                 </tr>
                                 <tr>
-                                    <td><h6 style="display: inline-block;">Result: <img src="/home/ubuntu/FYP/static/images/correct.svg" style="height: 20px;width: 20px;padding-bottom: 1px;"> </h6><br>It was detected that target website is using X-Content-Type-Options header.</td>
+                                    <td><h6 style="display: inline-block;">Result: <img src="/home/lubuntu/PycharmProjects/V/FYP/static/images/correct.svg" style="height: 20px;width: 20px;padding-bottom: 1px;"> </h6><br>It was detected that target website is using X-Content-Type-Options header.</td>
                                 </tr>
                                 <tr>
                                     <td><h6  style="display: inline-block;">Reference: </h6><br><a href="https://developer.mozilla.org/en-US/docs/Web/HTTP/Headers/X-Content-Type-Options">https://developer.mozilla.org/en-US/docs/Web/HTTP/Headers/X-Content-Type-Options</a> </td>
@@ -336,7 +336,7 @@
                                     <td><h6  style="display: inline-block;">Description:</h6><br>X-Frame-Options header protect against attacks like ClickJacking or Frame Injection. It tells browser that whether it allowed to load the website in an iframe or not.</td>
                                 </tr>
                                 <tr>
-                                    <td><h6 style="display: inline-block;">Result: <img src="/home/ubuntu/FYP/static/images/missing.svg" style="height: 20px;width: 20px;padding-bottom: 1px;"> </h6><br>It was detected that target website is missing X-Frame-Options header.</td>
+                                    <td><h6 style="display: inline-block;">Result: <img src="/home/lubuntu/PycharmProjects/V/FYP/static/images/missing.svg" style="height: 20px;width: 20px;padding-bottom: 1px;"> </h6><br>It was detected that target website is missing X-Frame-Options header.</td>
                                 </tr>
                                 <tr>
                                     <td><h6 style="display: inline-block;">Impact:</h6><br>Absense of X-Frame-Options caused website to load in an iframe and this can result in ClickJacking which in turn used for credential stealing & phishing.</td>
@@ -352,7 +352,7 @@
                                     <td><h6  style="display: inline-block;">Description:</h6><br>X-Frame-Options header protect against attacks like ClickJacking or Frame Injection. It tells browser that whether it allowed to load the website in an iframe or not.</td>
                                 </tr>
                                 <tr>
-                                    <td><h6 style="display: inline-block;">Result: <img src="/home/ubuntu/FYP/static/images/correct.svg" style="height: 20px;width: 20px;padding-bottom: 1px;"> </h6><br>It was detected that target website is using X-Frame-Options header.</td>
+                                    <td><h6 style="display: inline-block;">Result: <img src="/home/lubuntu/PycharmProjects/V/FYP/static/images/correct.svg" style="height: 20px;width: 20px;padding-bottom: 1px;"> </h6><br>It was detected that target website is using X-Frame-Options header.</td>
                                 </tr>
                                 <tr>
                                     <td><h6  style="display: inline-block;">Reference: </h6><br><a href="https://developer.mozilla.org/en-US/docs/Web/HTTP/Headers/X-Frame-Options">https://developer.mozilla.org/en-US/docs/Web/HTTP/Headers/X-Frame-Options</a> </td>
@@ -388,7 +388,7 @@
                                     <td><h6  style="display: inline-block;">Description:</h6><br>X-XSS-Protection header protect against Cross-site Scripting (XSS) attacks. It enable XSS-filtering in the browser and block page from rendering if it contain any malicious javascript.</td>
                                 </tr>
                                 <tr>
-                                    <td><h6 style="display: inline-block;">Result: <img src="/home/ubuntu/FYP/static/images/missing.svg" style="height: 20px;width: 20px;padding-bottom: 1px;"> </h6><br>It was detected that target website is missing X-XSS-Protection header.</td>
+                                    <td><h6 style="display: inline-block;">Result: <img src="/home/lubuntu/PycharmProjects/V/FYP/static/images/missing.svg" style="height: 20px;width: 20px;padding-bottom: 1px;"> </h6><br>It was detected that target website is missing X-XSS-Protection header.</td>
                                 </tr>
                                 <tr>
                                     <td><h6 style="display: inline-block;">Impact:</h6><br>Absense of X-XSS-Protection header increases the chances of Cross-site Scripting (XSS) vulnerabilities.</td>
@@ -404,7 +404,7 @@
                                     <td><h6  style="display: inline-block;">Description:</h6><br>X-XSS-Protection header protect against Cross-site Scripting (XSS) attacks. It enable XSS-filtering in the browser and block page from rendering if it contain any malicious javascript.</td>
                                 </tr>
                                 <tr>
-                                    <td><h6 style="display: inline-block;">Result: <img src="/home/ubuntu/FYP/static/images/correct.svg" style="height: 20px;width: 20px;padding-bottom: 1px;"> </h6><br>It was detected that target website is using X-XSS-Protection header.</td>
+                                    <td><h6 style="display: inline-block;">Result: <img src="/home/lubuntu/PycharmProjects/V/FYP/static/images/correct.svg" style="height: 20px;width: 20px;padding-bottom: 1px;"> </h6><br>It was detected that target website is using X-XSS-Protection header.</td>
                                 </tr>
                                 <tr>
                                     <td><h6  style="display: inline-block;">Reference: </h6><br><a href="https://developer.mozilla.org/en-US/docs/Web/HTTP/Headers/X-XSS-Protection">https://developer.mozilla.org/en-US/docs/Web/HTTP/Headers/X-XSS-Protection</a> </td>
@@ -428,7 +428,7 @@
         <div class="container">
             <div class="mt-5 mb-4 pt-1">
                 <h2 style="margin-bottom: 15px;">Results For Target</h2>
-                <img src="/home/ubuntu/FYP/static/images/arrow.svg" style="height: 25px;width: 25px;display: inline;padding-bottom: 5px;"><h5 style="display: inline;color:darkblue;">&nbsp;{{ target_ip }}&nbsp;</h5><img src="/home/ubuntu/FYP/static/images/arrow.svg" style="height: 25px;width: 25px;display: inline;padding-bottom: 5px;"><h5 style="display: inline;">&nbsp;Vulnerabilities</h5>
+                <img src="/home/lubuntu/PycharmProjects/V/FYP/static/images/arrow.svg" style="height: 25px;width: 25px;display: inline;padding-bottom: 5px;"><h5 style="display: inline;color:darkblue;">&nbsp;{{ target_ip }}&nbsp;</h5><img src="/home/lubuntu/PycharmProjects/V/FYP/static/images/arrow.svg" style="height: 25px;width: 25px;display: inline;padding-bottom: 5px;"><h5 style="display: inline;">&nbsp;Vulnerabilities</h5>
                 <hr style="color:orange; height: 3px;margin-bottom: 20px;">
             </div>
         </div>
@@ -451,7 +451,7 @@
                                     </td>
                                 </tr>
                                 <tr>
-                                    <td><h6 style="display: inline-block;">Result: <img src="/home/ubuntu/FYP/static/images/missing.svg" style="height: 20px;width: 20px;padding-bottom: 1px;"> </h6><br>It was detected that target website is vulnerable to Cross-site Scripting (XSS).</td>
+                                    <td><h6 style="display: inline-block;">Result: <img src="/home/lubuntu/PycharmProjects/V/FYP/static/images/missing.svg" style="height: 20px;width: 20px;padding-bottom: 1px;"> </h6><br>It was detected that target website is vulnerable to Cross-site Scripting (XSS).</td>
                                 </tr>
                                 <tr>
                                     <td><h6 style="display: inline-block;">Impact:</h6><br>Cross-site scripting vulnerabilities allow an attacker to
@@ -476,7 +476,7 @@
                                     </td>
                                 </tr>
                                 <tr>
-                                    <td><h6 style="display: inline-block;">Result: <img src="/home/ubuntu/FYP/static/images/correct.svg" style="height: 20px;width: 20px;padding-bottom: 1px;"> </h6><br>It was detected that target website is not vulnerable to XSS.</td>
+                                    <td><h6 style="display: inline-block;">Result: <img src="/home/lubuntu/PycharmProjects/V/FYP/static/images/correct.svg" style="height: 20px;width: 20px;padding-bottom: 1px;"> </h6><br>It was detected that target website is not vulnerable to XSS.</td>
                                 </tr>
                                 <tr>
                                     <td><h6  style="display: inline-block;">Reference: </h6><br><a href="https://www.acunetix.com/websitesecurity/cross-site-scripting/">https://www.acunetix.com/websitesecurity/cross-site-scripting/</a></td>
@@ -550,7 +550,7 @@
                                     </td>
                                 </tr>
                                 <tr>
-                                    <td><h6 style="display: inline-block;">Result: <img src="/home/ubuntu/FYP/static/images/missing.svg" style="height: 20px;width: 20px;padding-bottom: 1px;"> </h6><br>It was detected that target website is vulnerable to SQL Injection (Inference).</td>
+                                    <td><h6 style="display: inline-block;">Result: <img src="/home/lubuntu/PycharmProjects/V/FYP/static/images/missing.svg" style="height: 20px;width: 20px;padding-bottom: 1px;"> </h6><br>It was detected that target website is vulnerable to SQL Injection (Inference).</td>
                                 </tr>
                                 <tr>
                                     <td><h6 style="display: inline-block;">Impact:</h6><br>This vulnerability has severe effects on the
@@ -575,7 +575,7 @@
                                     </td>
                                 </tr>
                                 <tr>
-                                    <td><h6 style="display: inline-block;">Result: <img src="/home/ubuntu/FYP/static/images/correct.svg" style="height: 20px;width: 20px;padding-bottom: 1px;"> </h6><br>It was detected that target website is not vulnerable to SQL Injection.</td>
+                                    <td><h6 style="display: inline-block;">Result: <img src="/home/lubuntu/PycharmProjects/V/FYP/static/images/correct.svg" style="height: 20px;width: 20px;padding-bottom: 1px;"> </h6><br>It was detected that target website is not vulnerable to SQL Injection.</td>
                                 </tr>
                                 <tr>
                                     <td><h6  style="display: inline-block;">Reference: </h6><br><a href="https://www.acunetix.com/websitesecurity/sql-injection/">https://www.acunetix.com/websitesecurity/sql-injection/</a></td>
@@ -660,7 +660,7 @@
                                     </td>
                                 </tr>
                                 <tr>
-                                    <td><h6 style="display: inline-block;">Result: <img src="/home/ubuntu/FYP/static/images/missing.svg" style="height: 20px;width: 20px;padding-bottom: 1px;"> </h6><br>It was detected that target website is vulnerable to Cross-site Request Forgery (CSRF).</td>
+                                    <td><h6 style="display: inline-block;">Result: <img src="/home/lubuntu/PycharmProjects/V/FYP/static/images/missing.svg" style="height: 20px;width: 20px;padding-bottom: 1px;"> </h6><br>It was detected that target website is vulnerable to Cross-site Request Forgery (CSRF).</td>
                                 </tr>
                                 <tr>
                                     <td><h6 style="display: inline-block;">Impact:</h6><br> By exploiting CSRF an attacker can perform
@@ -683,7 +683,7 @@
                                     </td>
                                 </tr>
                                 <tr>
-                                    <td><h6 style="display: inline-block;">Result: <img src="/home/ubuntu/FYP/static/images/correct.svg" style="height: 20px;width: 20px;padding-bottom: 1px;"> </h6><br>It was detected that target website is not vulnerable to Cross-site Request Forgery (CSRF).</td>
+                                    <td><h6 style="display: inline-block;">Result: <img src="/home/lubuntu/PycharmProjects/V/FYP/static/images/correct.svg" style="height: 20px;width: 20px;padding-bottom: 1px;"> </h6><br>It was detected that target website is not vulnerable to Cross-site Request Forgery (CSRF).</td>
                                 </tr>
                                 <tr>
                                     <td><h6  style="display: inline-block;">Reference: </h6><br><a href="https://owasp.org/www-community/attacks/csrf">https://owasp.org/www-community/attacks/csrf</a></td>
@@ -756,7 +756,7 @@
                                     </td>
                                 </tr>
                                 <tr>
-                                    <td><h6 style="display: inline-block;">Result: <img src="/home/ubuntu/FYP/static/images/missing.svg" style="height: 20px;width: 20px;padding-bottom: 1px;"> </h6><br>It was detected that target website is vulnerable to ClickJacking.</td>
+                                    <td><h6 style="display: inline-block;">Result: <img src="/home/lubuntu/PycharmProjects/V/FYP/static/images/missing.svg" style="height: 20px;width: 20px;padding-bottom: 1px;"> </h6><br>It was detected that target website is vulnerable to ClickJacking.</td>
                                 </tr>
                                 <tr>
                                     <td><h6 style="display: inline-block;">Impact:</h6><br> By exploiting CSRF an attacker can perform
@@ -778,7 +778,7 @@
                                     </td>
                                 </tr>
                                 <tr>
-                                    <td><h6 style="display: inline-block;">Result: <img src="/home/ubuntu/FYP/static/images/correct.svg" style="height: 20px;width: 20px;padding-bottom: 1px;"> </h6><br>It was detected that target website is not vulnerable to ClickJacking.</td>
+                                    <td><h6 style="display: inline-block;">Result: <img src="/home/lubuntu/PycharmProjects/V/FYP/static/images/correct.svg" style="height: 20px;width: 20px;padding-bottom: 1px;"> </h6><br>It was detected that target website is not vulnerable to ClickJacking.</td>
                                 </tr>
                                 <tr>
                                     <td><h6  style="display: inline-block;">Reference: </h6><br><a href="https://owasp.org/www-community/attacks/Clickjacking">https://owasp.org/www-community/attacks/Clickjacking</a></td>
@@ -837,7 +837,7 @@
         <div class="container">
             <div class="mt-5 mb-4 pt-1">
                 <h2 style="margin-bottom: 15px;">Results For Target</h2>
-                <img src="/home/ubuntu/FYP/static/images/arrow.svg" style="height: 25px;width: 25px;display: inline;padding-bottom: 5px;"><h5 style="display: inline;color:darkblue;">&nbsp;{{ target_ip }}&nbsp;</h5><img src="/home/ubuntu/FYP/static/images/arrow.svg" style="height: 25px;width: 25px;display: inline;padding-bottom: 5px;"><h5 style="display: inline;">&nbsp;Footprinting</h5>
+                <img src="/home/lubuntu/PycharmProjects/V/FYP/static/images/arrow.svg" style="height: 25px;width: 25px;display: inline;padding-bottom: 5px;"><h5 style="display: inline;color:darkblue;">&nbsp;{{ target_ip }}&nbsp;</h5><img src="/home/lubuntu/PycharmProjects/V/FYP/static/images/arrow.svg" style="height: 25px;width: 25px;display: inline;padding-bottom: 5px;"><h5 style="display: inline;">&nbsp;Footprinting</h5>
                 <hr style="color:orange; height: 3px;margin-bottom: 20px;">
             </div>
         </div>
@@ -882,7 +882,7 @@
         <div class="container">
             <div class="mt-5 mb-4 pt-1">
                 <h2 style="margin-bottom: 15px;">Results For Target</h2>
-                <img src="/home/ubuntu/FYP/static/images/arrow.svg" style="height: 25px;width: 25px;display: inline;padding-bottom: 5px;"><h5 style="display: inline;color:darkblue;">&nbsp;{{ target_ip }}&nbsp;</h5><img src="/home/ubuntu/FYP/static/images/arrow.svg" style="height: 25px;width: 25px;display: inline;padding-bottom: 5px;"><h5 style="display: inline;">&nbsp;Warnings</h5>
+                <img src="/home/lubuntu/PycharmProjects/V/FYP/static/images/arrow.svg" style="height: 25px;width: 25px;display: inline;padding-bottom: 5px;"><h5 style="display: inline;color:darkblue;">&nbsp;{{ target_ip }}&nbsp;</h5><img src="/home/lubuntu/PycharmProjects/V/FYP/static/images/arrow.svg" style="height: 25px;width: 25px;display: inline;padding-bottom: 5px;"><h5 style="display: inline;">&nbsp;Warnings</h5>
                 <hr style="color:orange; height: 3px;margin-bottom: 20px;">
             </div>
         </div>
@@ -904,27 +904,27 @@
                                     {% if key == "Cookies" and val.cookies %}
                                         <tr>
                                             <th scope="row">{{ key }}</th>
-                                            <td><img src="/home/ubuntu/FYP/static/images/missing.svg" style="height: 20px;width: 20px;padding-bottom: 1px;">  {{ val }}</td>
+                                            <td><img src="/home/lubuntu/PycharmProjects/V/FYP/static/images/missing.svg" style="height: 20px;width: 20px;padding-bottom: 1px;">  {{ val }}</td>
                                             <td>Incorrect directives! <br> {% for k,v in val.items() %} {% if v == False %} {{k}} flag must be set in cookies. {% endif %} {% endfor %}</td>
                                         </tr>
                                     {% elif key == "Protocol" %}
                                         <tr>
                                             <th scope="row">{{ key }}</th>
-                                            <td><img src="/home/ubuntu/FYP/static/images/missing.svg" style="height: 20px;width: 20px;padding-bottom: 1px;">  {{ val }}</td>
+                                            <td><img src="/home/lubuntu/PycharmProjects/V/FYP/static/images/missing.svg" style="height: 20px;width: 20px;padding-bottom: 1px;">  {{ val }}</td>
                                             <td>Target is running over HTTP which is vulnerable to Man-in-the-middle attacks (MITM).</td>
                                         </tr>
                                     {% elif key == "Jquery"%}
                                         {% if val.status == "outdated" %}
                                             <tr>
                                                 <th scope="row">{{ key }}</th>
-                                                <td><img src="/home/ubuntu/FYP/static/images/missing.svg" style="height: 20px;width: 20px;padding-bottom: 1px;">  {{ val.version }}</td>
+                                                <td><img src="/home/lubuntu/PycharmProjects/V/FYP/static/images/missing.svg" style="height: 20px;width: 20px;padding-bottom: 1px;">  {{ val.version }}</td>
                                                 <td>Outdated version detected</td>
                                             </tr>
                                         {% endif %}
                                     {% else %}
                                         <tr>
                                             <th scope="row">{{ key }}</th>
-                                            <td><img src="/home/ubuntu/FYP/static/images/missing.svg" style="height: 20px;width: 20px;padding-bottom: 1px;">  {{ val }}</td>
+                                            <td><img src="/home/lubuntu/PycharmProjects/V/FYP/static/images/missing.svg" style="height: 20px;width: 20px;padding-bottom: 1px;">  {{ val }}</td>
                                             <td>Senstive information is being leaked</td>
                                         </tr>
                                     {% endif %}
