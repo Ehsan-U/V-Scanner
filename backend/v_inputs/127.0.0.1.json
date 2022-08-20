@@ -1,0 +1,1 @@
+{"xss": {"vulnerable parameters": [[]], "vulnerable_forms": [], "data": []}, "sqli": {"vulnerable parameters": [[]], "vulnerable_forms": ["http://127.0.0.1/sqli_1.php"], "data": [{"title": "a'b\"c'd\"", "action": "search"}]}, "csrf": {"vulnerable_forms": [["http://127.0.0.1/sqli_1.php"]]}}

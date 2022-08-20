@@ -1,0 +1,1 @@
+{"xss": {"vulnerable parameters": [["http://lms.ue.edu.pk/WebTop/Home.aspx?body=<script>alert(9)</script>"]], "vulnerable_forms": [], "data": []}, "sqli": {"vulnerable parameters": [[]], "vulnerable_forms": [], "data": []}, "csrf": {"vulnerable_forms": [[]]}}

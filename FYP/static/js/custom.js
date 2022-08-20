@@ -1,8 +1,8 @@
 $(document).ready(function (){
     $("#grade_div").fadeIn("slow");
     $("[data-toggle='tooltip']").tooltip({animation:true});
-    
-    
+
+
 })
 
 function h_report(){
@@ -12,7 +12,7 @@ function h_report(){
         element = document.getElementById("report__")
         element.className = "nav-link dropdown-toggle disabled"
     }
-    
+
 }
 
 //  validate input url
@@ -44,9 +44,9 @@ function validate() {
         }
     }
     catch (err) {
-        // 
+        //
     }
-    
+
 }
 
 function getCookie(name) {
@@ -66,7 +66,7 @@ function getCookie(name) {
         return cookieValue;
     }
     catch (err) {
-        // 
+        //
     }
 }
 
@@ -86,7 +86,7 @@ function send_req() {
                 'data':{'search':url,'selection':selection,'csrfmiddlewaretoken':csrftoken},
                 success:function(response) {
                     loader(true)
-                    window.location = `http://127.0.0.1:8000/result/?target=${url}`
+                    window.location = `http://127.0.0.1:8000/result/?target=${url.trim()}`
                 },
                 error: function(XMLHttpRequest, textStatus, errorThrown) {
                     loader(true)
@@ -219,6 +219,6 @@ function responsive_grades() {
         }
     }
     catch (err) {
-        // 
+        //
     }
 }
