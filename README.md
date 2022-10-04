@@ -22,7 +22,7 @@ V-Scanner: A tool for web application security testing
   ![Playwright (Web-Scraping)](https://img.shields.io/badge/-Playwright-333333?style=flat&logo=Playwright&logoColor=276DC3)
   ![Selenium (Web-Scraping)](https://img.shields.io/badge/-Selenium-333333?style=flat&logo=Selenium&logoColor=276DC3)
 - 🌐 &nbsp;
-  ![Kali](https://img.shields.io/badge/-KaliLinux-333333?style=flat&logo=KaliLinux)
+  ![Kali](https://img.shields.io/badge/-Kali%20Linux-333333?style=flat&logo=KaliLinux)
   ![Ubuntu](https://img.shields.io/badge/-Ubuntu-333333?style=flat&logo=Ubuntu&logoColor=1572B6)
   ![JavaScript](https://img.shields.io/badge/-JavaScript-333333?style=flat&logo=javascript)
   ![Bootstrap](https://img.shields.io/badge/-Bootstrap-333333?style=flat&logo=bootstrap&logoColor=563D7C)
