@@ -18,6 +18,9 @@ V-Scanner: A tool for web application security testing
   ![Python](https://img.shields.io/badge/-Python-333333?style=flat&logo=python)
   ![Django (Web-Apps)](https://img.shields.io/badge/-Django-333333?style=flat&logo=Django&logoColor=276DC3)
   ![Scrapy (Web-Scraping)](https://img.shields.io/badge/-Scrapy-333333?style=flat&logo=Scrapy&logoColor=276DC3)
+  ![Splash (Web-Scraping)](https://img.shields.io/badge/-Splash-333333?style=flat&logo=Splash&logoColor=276DC3)
+  ![Playwright (Web-Scraping)](https://img.shields.io/badge/-Playwright-333333?style=flat&logo=Playwright&logoColor=276DC3)
+  ![Selenium (Web-Scraping)](https://img.shields.io/badge/-Selenium-333333?style=flat&logo=Selenium&logoColor=276DC3)
 - 🌐 &nbsp;
   ![HTML5](https://img.shields.io/badge/-HTML5-333333?style=flat&logo=HTML5)
   ![CSS](https://img.shields.io/badge/-CSS-333333?style=flat&logo=CSS3&logoColor=1572B6)
@@ -39,6 +42,9 @@ V-Scanner: A tool for web application security testing
 
 <p align="center">
 <a href="mailto:au85265@gmail.com"><img alt="Email" src="https://img.shields.io/badge/Email-au85265@gmail.com-blue?style=flat-square&logo=gmail"></a>
+</p>
+<p align="center">
+<a href="https://www.upwork.com/freelancers/~018fe27cd797e8a786"><img alt="Email" src="https://img.shields.io/badge/Upwork-Ehsan U.-blue?style=flat-square&logo=upwork"></a>
 </p>
 
 ⭐️ From [Ehsan U.](https://github.com/Ehsan-U)
